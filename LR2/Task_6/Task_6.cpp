@@ -9,6 +9,6 @@ int main(){
     double b = x + D;
     double A = D*x/b;
     double S = (pow(A, 2) + b*cos(x))/(pow(D, 3) + (A + D - b));
-    cout << "СОСАТЬ АМЕРИКА" << S << endl;
+    cout << "S = " << S << endl;
 
 }
