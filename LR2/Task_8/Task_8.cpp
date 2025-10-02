@@ -47,7 +47,7 @@ double sqrt(double num){
 
     /*do{
         result = (result + num/result)/2;
-    } while (result*result - num > EPSILON || result*result - num < -EPSILON);*/ // с точность EPSILON
+    } while (result*result - num > EPSILON || result*result - num < -EPSILON);*/ // с точностью EPSILON
 
     double result = 1;
     if(num == 0){
@@ -96,13 +96,23 @@ double sin(double arg){
 }
 
 double arccos(double arg){
-    double result = 1;
+    /*double result = 1;
 
     for(int i = 0; i < 20; i++){
         result = result + (cos(result) - arg)/sin(result);
+    }*/ //первая реализация
+    
+    if(arg == 0){
+        return 1;
     }
-
-    return result;
+    else{
+        double result = 1;
+    
+        do{
+            result  = result + (cos(result) - arg)/sin(result);
+        } while (cos(result) - arg < -EPSILON || cos(result) - arg > EPSILON); // с точностью эпсилон, правда все равно она выше не стала:(
+        return result;
+    }
 }
 
 double area_Heron(double a, double b, double c){
