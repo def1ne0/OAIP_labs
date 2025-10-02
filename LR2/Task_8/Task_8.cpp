@@ -1,5 +1,5 @@
 #include <iostream>
-#define epsilon 1e-9
+#define EPSILON 1e-9
 #define PI 3.14159265358979323846
 using namespace std;
 
@@ -47,7 +47,7 @@ double sqrt(double num){
 
     /*do{
         result = (result + num/result)/2;
-    } while (result*result - num > epsilon || result*result - num < -epsilon);*/ // с точность epsilon
+    } while (result*result - num > EPSILON || result*result - num < -EPSILON);*/ // с точность EPSILON
 
     double result = 1;
     if(num == 0){
@@ -188,11 +188,25 @@ int main(){
     double in_radius = inscribed_radius(area_for_Heron, a, b, c);
     double out_radius = described_radius(area_for_Heron, a, b, c);
 
+    double in_length = circle_length(in_radius);
+    double out_length = circle_length(out_radius);
+
     double in_circle = circle_area(in_radius);
-    double out_circle = circle_area(out_circle);
+    double out_circle = circle_area(out_radius);
 
     double perimeter = a + b + c;
     double area_for_in_radius = area_for_r(in_radius, perimeter);
-    double are_for_out_radius = area_for_R(out_radius, a, b, c);
+    double area_for_out_radius = area_for_R(out_radius, a, b, c);
 
+    cout << "Длина сторон треугольника a, b, c соответственно: " << a << ", " << b << ", " << c << endl;
+    cout << "Длина высот труегольника, проводенных к сторонам a, b, c соответственно: " << h_a << ", " << h_b << ", " << h_c << endl; 
+    cout << "Длина медиан труегольника, проводенных к сторонам a, b, c соответственно: " << m_a << ", " << m_b << ", " << m_c << endl; 
+    cout << "Длина биссектрис труегольника, проводенных к сторонам a, b, c соответственно: " << b_a << ", " << b_b << ", " << b_c << endl; 
+    cout << "Величина углов труегольника, лежащих напротив сторон a, b, c соответственно: " << alpha << " (" << n_alpha << "°)" << ", " << beta << " (" << n_beta << "°)" << ", " << gamma << " (" << n_gamma << "°)" << endl;
+    cout << "Радиус вписанной и описанной окружности соотвественно: " << in_radius << ", " << out_radius << endl; 
+    cout << "Длина вписанной и описанной окружности соответственно: " << in_length << ", " << out_length << endl;
+    cout << "Площадь вписанной и описанной окружности соотвественно: " << in_circle << ", " << out_circle << endl; 
+    cout << "Периметр треугольника: " << perimeter << endl;
+    cout << "Площадь треугольника по Герону, по радиусу вписанной и описанной окружности соответственно: " << area_for_Heron << ", " << area_for_in_radius << ", " << area_for_out_radius << endl;
+    
 }
