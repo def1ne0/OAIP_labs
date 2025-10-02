@@ -84,7 +84,7 @@ double sin(double arg){
     double result = 0;
 
     if(arg == 0){
-        return 1;
+        return 0;
     }
     else{
         for(int i = 0; i < 15; i++){
