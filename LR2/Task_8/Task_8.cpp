@@ -1,4 +1,5 @@
 #include <iostream>
+#define epsilon 1e-9
 using namespace std;
 
 double pow(double num, int deg){
@@ -34,10 +35,70 @@ int factorial(int num){
 }
 
 double sqrt(double num){
-    double result = 0;
+    /*double result = 0;
     num -= 1;
     for(int i = 0; i < 20; i++){
         result += pow(-1, i)*factorial(2*i)/((1 - 2*i)*(pow(factorial(i), 2))*pow(4, i))*pow(num, i);
+    }
+
+    return result;*/ //для x < 1
+    
+
+    /*do{
+        result = (result + num/result)/2;
+    } while (result*result - num > epsilon || result*result - num < -epsilon);*/ // с точность epsilon
+
+    double result = 1;
+    if(num == 0){
+        return 0;
+    }
+    else if(num == 1){
+        return 1;
+    }
+    else{
+        for(int i = 0; i < 20; i++){
+            result = (result + num/result)/2;
+        }
+    }
+    
+    return result;
+}
+
+double cos(double arg){
+    double result = 0;
+
+    if(arg == 0){
+        return 1;
+    }
+    else{
+        for(int i = 0; i < 15; i++){
+            result += pow(-1, i)*pow(arg, 2*i)/(factorial(2*i));
+        }
+    }
+
+    return result;
+}
+
+double sin(double arg){
+    double result = 0;
+
+    if(arg == 0){
+        return 1;
+    }
+    else{
+        for(int i = 0; i < 15; i++){
+            result += pow(-1, i)*pow(arg, 2*i + 1)/(factorial(2*i+1));
+        }
+    }
+
+    return result;
+}
+
+double arccos(double arg){
+    double result = 1;
+
+    for(int i = 0; i < 20; i++){
+        result = result + (cos(result) - arg)/sin(result);
     }
 
     return result;
@@ -48,10 +109,12 @@ int main(){
     cout << "Введите координаты вершины A(x1, y1), B(x2, y2), C(x3, y3)" << endl;
     cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
     double a = */
-    double x, a;
+    double x, a, b, c;
     int y, z;
-    cin >> x >> y >> z >> a;
-    cout << "x^y = " << pow(x, y) << endl;
-    cout << "z! = " << factorial(z) << endl;
-    cout <<"sqrt(a) = " << sqrt(a) << endl;
+    cin >> a >> b >> c;
+
+    cout <<"cos(a) = " << cos(a) << endl;
+    cout <<"sin(b) = " << sin(b) << endl;
+    cout <<"arccos(c) = " << arccos(c) << endl;
+
 }
