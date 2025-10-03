@@ -101,17 +101,22 @@ double arccos(double arg){
     for(int i = 0; i < 20; i++){
         result = result + (cos(result) - arg)/sin(result);
     }*/ //первая реализация
-    
+    double result = 1;
+
     if(arg == 0){
-        return 1;
+        return PI/2;
     }
-    else{
-        double result = 1;
-    
+    else if(arg > 0){
         do{
             result  = result + (cos(result) - arg)/sin(result);
         } while (cos(result) - arg < -EPSILON || cos(result) - arg > EPSILON); // с точностью эпсилон, правда все равно она выше не стала:(
         return result;
+    }else{
+        arg = -arg;
+        do{
+            result  = result + (cos(result) - arg)/sin(result);
+        } while (cos(result) - arg < -EPSILON || cos(result) - arg > EPSILON); // с точностью эпсилон, правда все равно она выше не стала:(
+        return PI - result;
     }
 }
 
@@ -218,5 +223,4 @@ int main(){
     cout << "Площадь вписанной и описанной окружности соотвественно: " << in_circle << ", " << out_circle << endl; 
     cout << "Периметр треугольника: " << perimeter << endl;
     cout << "Площадь треугольника по Герону, по радиусу вписанной и описанной окружности соответственно: " << area_for_Heron << ", " << area_for_in_radius << ", " << area_for_out_radius << endl;
-    
 }
