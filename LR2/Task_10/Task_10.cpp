@@ -31,7 +31,7 @@ int main(){
     else if(length <= r1 - r2){
         cout << "Да, но справедливо обратное для двух фигур" << endl;
     }
-    else if(length < r1 + r2 || length == r1 + r2){
+    else if(length <= r1 + r2){
         cout << "Фигуры пересекаются" << endl;
     }
     else {
