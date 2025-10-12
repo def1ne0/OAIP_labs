@@ -21,6 +21,8 @@ template <class T> cin_info<T> check_cin() {
    
    if (cin >> input) {
        cin_info<T> input_info(input, false);
+       cin.clear();
+       cin.ignore(numeric_limits<streamsize>::max(), '\n');
        
        return input_info;
    } else {
