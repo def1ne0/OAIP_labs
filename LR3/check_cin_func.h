@@ -10,7 +10,7 @@ template <typename T> struct cin_info {
     T arg;
     bool is_error;
     
-    cin_info<T>(T arg, bool is_error) {
+    cin_info<T>(const T& arg, bool is_error) {
         this->arg = arg;
         this->is_error = is_error;
     }
