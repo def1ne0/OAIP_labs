@@ -32,11 +32,23 @@ long double with_cmath(long double& arg) {
     return 2*(cos(arg)*cos(arg) - 1);
 }
 
-long double with_decomposition(long double& arg, unsigned& n) {
+/*long double with_decomposition(long double& arg, unsigned& n) {
     long double sum = 0;
 
     for (unsigned i = 1; i <= n; i++) {
         sum += pow(-1, i)*pow(2*arg, 2*i)/tgamma(2*i + 1);
+    }
+
+    return sum;
+}*/
+
+long double with_decomposition(long double& arg, int& n) {
+    long double sum = 0;
+    long double delta = 1;
+
+    for (int i = 0; i < n; i++) {
+        delta *= -4*arg*arg/((2*i + 2)*(2*i + 1));
+        sum += delta;
     }
 
     return sum;
@@ -51,7 +63,7 @@ string null_str(long double& arg) {
 }
 
 void do_Task_4() {
-    unsigned n, count_x;
+    int n, count_x;
     n = input_value<int>("Введите количество членов ряда n", "Ошибка, попробуйте снова", true, 0);
 
 
