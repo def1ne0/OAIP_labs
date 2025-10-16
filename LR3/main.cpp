@@ -11,6 +11,7 @@
 #include "Task_5.h"
 #include "Task_6.h"
 #include "Task_7.h"
+#include "Task_8.h"
 
 #define SEP cout << "************************" << endl;
 #define PRE_ESSENCE "Суть задания:\n "
@@ -47,7 +48,8 @@ void menu () {
         "Разложение функции Y(x) в ряд S(x)",
         "Найти приближенный корень уравнения f(x) = 0",
         "Из величин, определяемыми выражениями при заданном x определить минимальное значение",
-        "Вывести числа Армстронга меньше заданного пользователем"
+        "Вывести числа Армстронга меньше заданного пользователем",
+        "Вычислить сумму a0 - 2a1 + 4a2 - 8a3 + ... + 2^(n-1)*(-1)^(n-1)*an-1"
     };
     bool exit = false;
     while (!exit) {
@@ -91,6 +93,11 @@ void menu () {
         case 7:
             cout << PRE_ESSENCE << essence[6] << COMPL_BY << endl;
             do_Task_7();
+            SEP
+            break;
+        case 8:
+            cout << PRE_ESSENCE << essence[7] << COMPL_BY << endl;
+            do_Task_8();
             SEP
             break;
         default:
