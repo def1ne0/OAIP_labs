@@ -22,7 +22,7 @@ void do_Task_5() {
             arg = i;
         }
 
-        cout << "val: " << value << "arg: " << i << endl;
+        //cout << "val: " << value << " arg: " << i << endl; 
     }
 
     cout << "Приближенный корень уравнения sinh(x) + arccos(x) - 1.5 = 0: " << arg << endl;
