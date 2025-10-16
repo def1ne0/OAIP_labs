@@ -10,16 +10,6 @@
 
 using namespace std;
 
-unsigned factorial(unsigned arg) {
-    if (arg == 0) {
-        return 1;
-    } else if (arg == 1) {
-        return 1;
-    } else {
-        return arg*factorial(arg - 1);
-    }
-}
-
 bool check_interval(long double& arg, long double min, long double max) {
     if (arg >= min && arg <= max) {
         return true;
