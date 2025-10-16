@@ -11,7 +11,7 @@ void do_Task_5() {
     unsigned n;
     long double value = fabs(sinh(0) + acos(0) - 1.5);
     long double arg = 0;
-    n = input_value<unsigned>("На сколько частей разделить область поиска корня?");
+    n = input_value<int>("На сколько частей разделить область поиска корня?", "Ошибка, повторите попытку", true, 1);
     long double step = 1.0/n;
 
     for (long double i = step; i <= 1; i += step) {

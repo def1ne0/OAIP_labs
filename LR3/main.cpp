@@ -10,6 +10,7 @@
 #include "Task_4.h"
 #include "Task_5.h"
 #include "Task_6.h"
+#include "Task_7.h"
 
 #define SEP cout << "************************" << endl;
 #define PRE_ESSENCE "Суть задания:\n "
@@ -45,7 +46,8 @@ void menu () {
         "Используя цикл for составить программу вычисления значений функции y = sin(x) - cos(x) на отрезке [A, B] в точках Xi = A + i*H",
         "Разложение функции Y(x) в ряд S(x)",
         "Найти приближенный корень уравнения f(x) = 0",
-        "Из величин, определяемыми выражениями при заданном x определить минимальное значение"
+        "Из величин, определяемыми выражениями при заданном x определить минимальное значение",
+        "Вывести числа Армстронга меньше заданного пользователем"
     };
     bool exit = false;
     while (!exit) {
@@ -84,6 +86,11 @@ void menu () {
         case 6:
             cout << PRE_ESSENCE << essence[5] << COMPL_BY << endl;
             do_Task_6();
+            SEP
+            break;
+        case 7:
+            cout << PRE_ESSENCE << essence[6] << COMPL_BY << endl;
+            do_Task_7();
             SEP
             break;
         default:

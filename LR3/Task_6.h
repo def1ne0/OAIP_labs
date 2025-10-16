@@ -17,40 +17,6 @@ long double my_abs(long double arg) {
     }
 }
 
-long double my_pow(long double num, int deg) {
-    long double result = 1;
-    if (num == 0 && deg == 0) {
-        return 1;
-    } else if(num == 0) {
-        return 0;
-    }
-    else if (num == 1) {
-       return 1;
-    }
-    else if (deg == 1) {
-        return num;
-    }
-    else {
-        for (int i = 0; i < deg; i++) {
-            result *= num;
-        }
-        return result;
-    }
-
-}
-
-int factorial(int num) {
-    if (num == 0) {
-        return 1;
-    }
-    else if (num == 1) {
-        return 1;
-    }
-    else {
-        return num*factorial(num - 1);
-    }
-}
-
 long double normilize(long double arg) {
     while (my_abs(arg) > 2*PI) {
         if (arg < 0) {

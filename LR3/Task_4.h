@@ -36,7 +36,7 @@ long double with_decomposition(long double& arg, unsigned& n) {
     long double sum = 0;
 
     for (unsigned i = 1; i <= n; i++) {
-        sum += pow(-1, i)*pow(2*arg, 2*i)/factorial(2*i);
+        sum += pow(-1, i)*pow(2*arg, 2*i)/tgamma(2*i + 1);
     }
 
     return sum;
@@ -50,11 +50,12 @@ string null_str(long double& arg) {
     }
 }
 
-
 void do_Task_4() {
     unsigned n, count_x;
-    n = input_value<unsigned>("Введите количество членов ряда n");
-    count_x = input_value<unsigned>("Введите количество чисел x, от которых хотите посчитать функцию");
+    n = input_value<int>("Введите количество членов ряда n", "Ошибка, попробуйте снова", true, 0);
+
+
+    count_x = input_value<int>("Введите количество чисел x, от которых хотите посчитать функцию", "Ошибка, попробуйте снова", true, 0);
     
     vector<long double> x_values(count_x);
     vector<long double> f_x_cmath(count_x);
