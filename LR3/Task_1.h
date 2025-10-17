@@ -4,7 +4,7 @@
 using namespace std;
 
 void do_Task_1 () {
-    unsigned i = 0;
+    unsigned i = 1;
     int a, b;
     int sum = 0;
     while (i < 31) {

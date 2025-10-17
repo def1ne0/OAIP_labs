@@ -19,19 +19,19 @@ template <typename T> struct cin_info {
 template <class T> cin_info<T> check_cin() {
     T input;
    
-   if (cin >> input) {
-       cin_info<T> input_info(input, false);
-       cin.clear();
-       cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    if (cin >> input) {
+        cin_info<T> input_info(input, false);
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
        
-       return input_info;
-   } else {
-       cin.clear();
-       cin.ignore(numeric_limits<streamsize>::max(), '\n');
-       cin_info<T> input_info(T{}, true);
+        return input_info;
+    } else {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin_info<T> input_info(T{}, true);
        
-       return input_info;
-   }
+        return input_info;
+    }
 }
 
 template <class T> bool check_interval_type(T arg, T a, T b) {

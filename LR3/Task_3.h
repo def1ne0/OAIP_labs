@@ -2,7 +2,8 @@
 
 #include <iostream>
 #include <cmath>
-#define PI 3.14159265358979
+
+#define PI 3.14159265358979323846L
 
 using namespace std;
 

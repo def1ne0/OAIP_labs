@@ -65,7 +65,7 @@ void do_Task_4() {
     vector<long double> f_x_decompostion(count_x);
 
     for (unsigned i = 0; i < count_x; i++) {
-        long double x = input_value<long double>("Введите х в интервале [0,1; 1]", "Ошибка, попробуйте снова", true, 0.1L, 1.0L3);
+        long double x = input_value<long double>("Введите х в интервале [0,1; 1]", "Ошибка, попробуйте снова", true, 0.1L, 1.0L);
 
         x_values[i] = x;
         f_x_cmath[i] = with_cmath(x);
