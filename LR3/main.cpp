@@ -15,6 +15,7 @@
 
 #define SEP cout << "************************" << endl;
 #define PRE_ESSENCE "Суть задания:\n "
+#define MY_VARIANT "\n Вариант 12"
 #define COMPL_BY "\n Выполнил: Финевич Арсений"
 
 using namespace std;
@@ -76,12 +77,12 @@ void menu () {
             SEP
             break;
         case 4:
-            cout << PRE_ESSENCE << essence[3] << COMPL_BY << endl;
+            cout << PRE_ESSENCE << essence[3] << COMPL_BY << MY_VARIANT << endl;
             do_Task_4();
             SEP
             break;
         case 5:
-            cout << PRE_ESSENCE << essence[4] << COMPL_BY << endl;
+            cout << PRE_ESSENCE << essence[4] << COMPL_BY << MY_VARIANT << endl;
             do_Task_5();
             SEP
             break;
