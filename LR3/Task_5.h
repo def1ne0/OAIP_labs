@@ -8,7 +8,7 @@
 using namespace std;
 
 void do_Task_5() {
-    unsigned n;
+    int n;
     long double value = fabs(sinh(0) + acos(0) - 1.5);
     long double arg = 0;
     n = input_value<int>("На сколько частей разделить область поиска корня?", "Ошибка, повторите попытку", true, 1);
