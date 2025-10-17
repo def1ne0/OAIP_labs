@@ -52,10 +52,11 @@ string null_str(long double& arg) {
     }
 }
 
+
+
 void do_Task_4() {
     int n, count_x;
     n = input_value<int>("Введите количество членов ряда n", "Ошибка, попробуйте снова", true, 0);
-
 
     count_x = input_value<int>("Введите количество чисел x, от которых хотите посчитать функцию", "Ошибка, попробуйте снова", true, 0);
     
@@ -64,10 +65,12 @@ void do_Task_4() {
     vector<long double> f_x_decompostion(count_x);
 
     for (unsigned i = 0; i < count_x; i++) {
-        bool exit = false;
-        long double x;
+        long double x = input_value<long double>("Введите х в интервале [0,1; 1]", "Ошибка, попробуйте снова", true, 0.1L, 1.0L3);
 
-        while (!exit) {
+        x_values[i] = x;
+        f_x_cmath[i] = with_cmath(x);
+        f_x_decompostion[i] = with_decomposition(x, n);
+        /*while (!exit) {
             x = input_value<long double>("Введите х в интервале [0.1; 1]");
 
             if (check_interval(x, 0.1L, 1L)) {
@@ -76,12 +79,9 @@ void do_Task_4() {
             } else {
                 cout << "x не в интервале [0.1; 1]";
             }
-        }
-    }
+        } */
 
-    for (unsigned i = 0; i < count_x; i++) {
-        f_x_cmath[i] = with_cmath(x_values[i]);
-        f_x_decompostion[i] = with_decomposition(x_values[i], n);
+        
     }
 
     cout << "        X         |    f(x) cmath    |f(x) decomposition|" << endl;
