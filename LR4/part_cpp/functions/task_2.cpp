@@ -15,6 +15,7 @@ namespace t2 {
 
         std::cout << m << std::endl;
         std::cout << n << std::endl;
+        
         int arr[m][n];
         int min_columns[n];
 

@@ -4,15 +4,15 @@
 #include "task_3.h"
 
 namespace t3 {
-    double** create_arr(int n) {
+    double **create_arr(int n) {
         std::random_device my_rand;
         std::mt19937 range(my_rand());
         std::uniform_real_distribution<double> dist(1.0, 9.0);
 
-        double **arr = new double*[n];
+        double **arr = new double *[n];
 
         for (unsigned row = 0; row < n; row++) {
-            arr[row] = new double[n];
+            arr[row] = new double [n];
         }
 
         for (unsigned row = 0; row < n; row++) {
@@ -44,11 +44,11 @@ namespace t3 {
         }
     }
 
-    int** new_arr(double **arr, int n) {
-        int **new_arr = new int*[n];
+    int **new_arr(double **arr, int n) {
+        int **new_arr = new int* [n];
 
         for (unsigned row = 0; row < n; row++) {
-            new_arr[row] = new int[n];
+            new_arr[row] = new int [n];
         }
 
         for (unsigned row = 0; row < n; row++) {
