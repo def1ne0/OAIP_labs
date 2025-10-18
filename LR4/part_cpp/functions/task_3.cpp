@@ -45,7 +45,7 @@ namespace t3 {
     }
 
     int **new_arr(double **arr, int n) {
-        int **new_arr = new int* [n];
+        int **new_arr = new int *[n];
 
         for (unsigned row = 0; row < n; row++) {
             new_arr[row] = new int [n];
