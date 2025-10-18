@@ -47,5 +47,7 @@ namespace t2 {
         for (unsigned i = 0; i < n; i++) {
             std::cout << "В столбце " << i + 1 << " минимальный элемент: " << min_columns[i] << std::endl;
         }
+
+        return;
     }
 }
