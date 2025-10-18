@@ -13,5 +13,7 @@ namespace tasks {
         std::cout << "Суть задания:\n " << essence[choice - 1] << compl_by << std::endl;
         func_array[choice - 1]();
         std::cout << "*****************" << std::endl;
+
+        return;
     }
 }
