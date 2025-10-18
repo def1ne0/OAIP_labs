@@ -29,5 +29,7 @@ namespace t1 {
         }
 
         std::cout << "Число инверсий: " << inversions << std::endl;
+
+        return;
     }
 }
