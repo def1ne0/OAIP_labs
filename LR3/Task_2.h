@@ -6,7 +6,7 @@ using namespace std;
 
 void do_Task_2 () {
     long double sum = 0;
-    long double di = 23;
+    long double di = 0;
     unsigned i = 1;
     
     do {
