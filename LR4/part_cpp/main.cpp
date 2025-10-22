@@ -18,7 +18,7 @@ void menu() {
     const std::string pre_essence = "Суть задания\n ";
     const std::string compl_by = "\nВыполнил Финевич Арсений\nВариант 12";
 
-    void (*tasks_array[3])() = {
+    void (*tasks_array[3]) () = {
         t1::do_task_1,
         t2::do_task_2,
         t3::do_task_3
