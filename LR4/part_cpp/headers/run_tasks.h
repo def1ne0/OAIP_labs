@@ -6,7 +6,7 @@
 namespace tasks {
     void run_task(
         int &, 
-        void (*[])(), 
+        void (*[]) (), 
         const std::vector<std::string> &, 
         const std::string &
     );
