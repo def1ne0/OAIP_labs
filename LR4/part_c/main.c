@@ -20,14 +20,14 @@ void menu() {
             do_task_4
         };
 
-        int choice = input_int();
+        int choice = input_int(4, 6);
 
         switch (choice) {
             case 0:
                 exit = 1;
                 break;
             default:
-                run_task(tasks_array, choice);
+                run_task(tasks_array, choice - 3);
                 break;
         }
     }
