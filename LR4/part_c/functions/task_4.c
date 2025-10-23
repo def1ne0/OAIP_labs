@@ -9,7 +9,7 @@ int ***create_default_arr(int n) {
     int ***arr = (int ***) malloc(n * sizeof(int **));
 
     for (unsigned i = 0; i < n; i++) {
-        arr[i] = (int**) malloc(n * sizeof(int *));
+        arr[i] = (int **) malloc(n * sizeof(int *));
         for (unsigned j = 0; j < n; j++) {
             arr[i][j] = (int *) malloc(n * sizeof(int));
         }
@@ -18,7 +18,7 @@ int ***create_default_arr(int n) {
     for (unsigned i = 0; i < n; i++) {
         for (unsigned j = 0; j < n; j++) {
             for (unsigned k = 0; k < n; k++) {
-                arr[i][j][k] = (int) (k + 1);
+                arr[i][j][k] = (int) (i*j + i*k - j*k);
             }
         }
     }
@@ -71,8 +71,8 @@ void print_arr(int ***arr, int n) {
 
 void do_task_4() {
     int n;
-    printf("Введите n\n");
-    n = input_int(INT_MIN, INT_MAX);
+    printf("Введите n (минимум 1)\n");
+    n = input_int(1, INT_MAX);
 
     int ***arr = create_default_arr(n);
 
