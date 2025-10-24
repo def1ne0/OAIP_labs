@@ -17,7 +17,7 @@ char **create_field(int rows, int columns) {
     }
 
     field[0][1] = '*';
-    field[3][2] = '*';
+    field[2][2] = '*';
 
     return field;
 }
@@ -36,9 +36,60 @@ void print_field(char **field, int rows, int columns) {
 char **set_numbers(char **field, int rows, int columns) {
     for (int row = 0; row < rows; row++) {
         for (int col = 0; col < columns; col++) {
-            if (field[row][col] == '*') {
-                field[row][col] = '1';
+            if (field[row][col] != '.') continue;
+            int count_bombs = 0;
+            if (row - 1 >= 0) {
+                if (field[row - 1][col] == '*') {
+                    count_bombs++;
+                }
             }
+            
+            if (col - 1 >= 0) {
+                if (field[row][col - 1] == '*') {
+                    count_bombs++;
+                }
+            }
+
+            if (row - 1 >= 0 && col - 1 >= 0) {
+                if (field[row - 1][col - 1] == '*') {
+                    count_bombs++;
+                }
+            }
+            
+            if (row + 1 < rows) {
+                if (field[row + 1][col] == '*') {
+                    count_bombs++;
+                }
+            }
+
+            if (col + 1 < columns) {
+                if (field[row][col + 1] == '*') {
+                    count_bombs++;
+                }
+            }
+
+            if (row + 1 < rows && col + 1 < columns) {
+                if (field[row + 1][col + 1] == '*') {
+                    count_bombs++;
+                }
+            }
+
+            if (row + 1 < rows && col - 1 >=0) {
+                if (field[row + 1][col - 1] == '*') {
+                    count_bombs++;
+                }
+            }
+
+            if (row - 1 >= 0 && col + 1 < columns) {
+                if (field[row - 1][col + 1] == '*') {
+                    count_bombs++;
+                }
+            }
+
+            if (count_bombs) {
+                field[row][col] = count_bombs + '0';
+            }
+
         }
     }
 
