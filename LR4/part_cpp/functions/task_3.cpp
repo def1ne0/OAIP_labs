@@ -44,7 +44,7 @@ namespace t3 {
         }
     }
 
-    void new_arr(double **arr, int n) {
+    int **new_arr(double **arr, int n) {
         int **new_arr = new int *[n];
 
         for (unsigned row = 0; row < n; row++) {
