@@ -44,7 +44,7 @@ namespace t3 {
         }
     }
 
-    int **new_arr(double **arr, int n) {
+    void new_arr(double **arr, int n) {
         int **new_arr = new int *[n];
 
         for (unsigned row = 0; row < n; row++) {
@@ -56,8 +56,6 @@ namespace t3 {
                 new_arr[row][col] = arr[row][col] > arr[row][row] ? 1 : 0;
             }
         }
-
-        return new_arr;
     }
 
     void do_task_3() {
@@ -66,7 +64,7 @@ namespace t3 {
 
         print_arr(arr, n);
 
-        int **new_array = new_arr(arr, n);
+        new_arr(arr, n);
 
         std::cout << "Новая целочисленная матрица: " << std::endl;
 
