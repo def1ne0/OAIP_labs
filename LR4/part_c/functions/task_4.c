@@ -61,7 +61,7 @@ void print_arr(int ***arr, int n) {
 
     for (unsigned i = 0; i < n; i++) {
         for (unsigned j = 0; j < n; j++) {
-            printf("%c", arr[i][n - 1 - j][n - 1 - j]);
+            printf("%d", arr[i][n - 1 - j][n - 1 - j]);
             printf(" ");
         }
 

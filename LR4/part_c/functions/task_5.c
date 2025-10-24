@@ -33,7 +33,7 @@ void print_field(char **field, int rows, int columns) {
     }
 }
 
-char **set_numbers(char **field, int rows, int columns) {
+void set_numbers(char **field, int rows, int columns) {
     for (int row = 0; row < rows; row++) {
         for (int col = 0; col < columns; col++) {
             if (field[row][col] != '.') continue;
@@ -92,8 +92,6 @@ char **set_numbers(char **field, int rows, int columns) {
 
         }
     }
-
-    return field;
 }
 
 void do_task_5() {
@@ -101,7 +99,7 @@ void do_task_5() {
     const int columns = 5;
     char **field = create_field(rows, columns);
 
-    field = set_numbers(field, rows, columns);
+    set_numbers(field, rows, columns);
 
     print_field(field, rows, columns);
 
