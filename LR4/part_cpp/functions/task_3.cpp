@@ -64,7 +64,7 @@ namespace t3 {
 
         print_arr(arr, n);
 
-        new_arr(arr, n);
+        int** new_array = new_arr(arr, n);
 
         std::cout << "Новая целочисленная матрица: " << std::endl;
 
