@@ -56,6 +56,8 @@ namespace t3 {
                 new_arr[row][col] = arr[row][col] > arr[row][row] ? 1 : 0;
             }
         }
+
+        return new_arr;
     }
 
     void do_task_3() {

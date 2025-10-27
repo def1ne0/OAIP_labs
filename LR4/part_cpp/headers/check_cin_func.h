@@ -33,21 +33,16 @@ namespace io {
         while (!exit) {
             if (!(std::cin >> input)) {
                 std::cout << error_text << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             } else if (!interval_checking) {
                 exit = true;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             } else if (check_interval_type(input, a, b)) {
                 exit = true;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             } else {
                 std::cout << "Выход из диапазона данного типа" << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
+
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         
         }
         
