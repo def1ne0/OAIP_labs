@@ -10,16 +10,15 @@ int input_int(int min, int max ) {
     while(!exit) {
         if (scanf("%d", &input)) {
             if (input >= min && input <= max) {
-                while ((c = getchar()) != '\n' && c != EOF);
                 exit = 1;
             } else {
                 printf("%s", "Ошибка, выход из диапазона, повторите попытку\n");
-                while ((c = getchar()) != '\n' && c != EOF);
             }
         } else {
             printf("%s", "Ошибка, повторите попытку\n");
-            while ((c = getchar()) != '\n' && c != EOF);
         }
+
+        while ((c = getchar()) != '\n' && c != EOF);
     }
 
     return input;
