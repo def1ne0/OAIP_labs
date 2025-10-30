@@ -91,4 +91,6 @@ void do_task_4() {
     }
 
     free(arr);
+
+    arr = NULL;
 }

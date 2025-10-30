@@ -156,4 +156,6 @@ void do_task_6() {
     }
 
     free(square);
+
+    square = NULL;
 }
