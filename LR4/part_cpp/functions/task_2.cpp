@@ -12,7 +12,6 @@ namespace t2 {
         int m = dist(range);
         int n = dist(range);
 
-
         std::cout << m << std::endl;
         std::cout << n << std::endl;
         

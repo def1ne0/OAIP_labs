@@ -108,4 +108,6 @@ void do_task_5() {
     }
 
     free(field);
+
+    field = NULL;
 }
