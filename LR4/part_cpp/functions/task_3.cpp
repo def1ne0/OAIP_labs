@@ -80,6 +80,9 @@ namespace t3 {
         delete[] arr;
         delete[] new_array;
 
+        arr = nullptr;
+        new_array = nullptr;
+
         return;
     }
 }
