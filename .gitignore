@@ -1,4 +1,4 @@
-.vscode/
-.zed/
-.cache/
+**/.vscode/
+**/.zed/
+**/.cache/
 compile_commands.json
