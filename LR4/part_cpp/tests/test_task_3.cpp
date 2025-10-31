@@ -9,9 +9,9 @@ double **create_arr(int n) {
         arr[row] = new double [n];
     }
 
-    for (unsigned i = 0; i < n; i++) {
-        for (unsigned j = 0; j < n; j++) {
-            arr[i][j] = static_cast<int>(-i + j + i*j);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            arr[i][j] = static_cast<double>(-i + j + i*j);
         }
     }
 
