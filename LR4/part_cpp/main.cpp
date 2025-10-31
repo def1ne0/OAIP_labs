@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 
 #include "check_cin_func.h"
@@ -26,7 +25,7 @@ void menu() {
 
     while (!exit) {
         int choice = io::input_value<int>(
-            "Выберите пункт меню:\n 0. Выйти\n n. Введите n, где n - номер задания (1-3)", 
+            "Выберите пункт меню:\n 0. Выйти\n n. Введите n, где n - номер задания (1-3)",
             "Ошибка, введите число, соответствующее пункту меню",
             true,
             0,
@@ -41,7 +40,7 @@ void menu() {
                 tasks::run_task(choice, tasks_array, essence, compl_by);
                 break;
         }
-        
+
     }
 }
 
