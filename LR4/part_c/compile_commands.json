@@ -1,0 +1,86 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./headers",
+      "-g",
+      "-o",
+      "main",
+      "main.c"
+    ],
+    "directory": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c",
+    "file": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/main.c",
+    "output": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/main"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./headers",
+      "-g",
+      "-o",
+      "main",
+      "./functions/check_input.c"
+    ],
+    "directory": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c",
+    "file": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/functions/check_input.c",
+    "output": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/main"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./headers",
+      "-g",
+      "-o",
+      "main",
+      "./functions/run_tasks_c.c"
+    ],
+    "directory": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c",
+    "file": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/functions/run_tasks_c.c",
+    "output": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/main"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./headers",
+      "-g",
+      "-o",
+      "main",
+      "./functions/task_4.c"
+    ],
+    "directory": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c",
+    "file": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/functions/task_4.c",
+    "output": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/main"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./headers",
+      "-g",
+      "-o",
+      "main",
+      "./functions/task_5.c"
+    ],
+    "directory": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c",
+    "file": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/functions/task_5.c",
+    "output": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/main"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./headers",
+      "-g",
+      "-o",
+      "main",
+      "./functions/task_6.c"
+    ],
+    "directory": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c",
+    "file": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/functions/task_6.c",
+    "output": "/home/define/Документы/cpp_tasks/553502/OAIP/LR4/part_c/main"
+  }
+]
