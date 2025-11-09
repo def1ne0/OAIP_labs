@@ -20,19 +20,13 @@ namespace t1 {
     }
 
     void do_task_1() {
-        int k = io::input_value<int>(
-            "Введите количество элементов массива k (минимум 2)", 
-            "Ошибка, попробуйте снова", 
-            true, 
-            2
-        );
+        int k = 5;
 
-        int arr[k];
+        int arr[5];
 
         for (unsigned i = 0; i < k; i++) {
             arr[i] = io::input_value<int>("Введите элемент массива с индексом " + std::to_string(i));
         }
-        
 
         std::cout << "Число инверсий: " << get_inversions(arr, k) << std::endl;
 
