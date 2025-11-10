@@ -64,7 +64,7 @@ namespace task_4 {
         }
 
         for (unsigned row = 0; row < rows; row++) {
-            delete orig_arr[row];
+            delete [] orig_arr[row];
         }
 
         delete [] orig_arr;
@@ -99,7 +99,7 @@ namespace task_4 {
         print_matrix(arr, rows, columns);
 
         for (unsigned row = 0; row < rows; row++) {
-            delete arr[row];
+            delete [] arr[row];
         }
 
         delete [] arr;
