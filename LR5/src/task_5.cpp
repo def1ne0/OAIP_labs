@@ -1,9 +1,9 @@
-#include "task_3.h"
-#include "check_cin.h"
 #include <print>
-#include <string>
 
-namespace task_3 {
+#include "check_cin.h"
+#include "task_5.h"
+
+namespace task_5 {
     struct my_array {
         int *data;
         int size;
@@ -47,47 +47,48 @@ namespace task_3 {
         }
 
         my_array(const my_array &) = delete;
-        my_array & operator=(my_array &&) = delete;
+        my_array &operator=(my_array &&) = delete;
         my_array &operator=(const my_array &) = delete;
     };
 
     int **input_arr(int rows, int columns) {
-        int **A = new int *[rows];
+        int **arr = new int *[rows];
 
         for (unsigned row = 0; row < rows; row++) {
-            A[row] = new int [columns];
+            arr[row] = new int [columns];
 
             for (unsigned col = 0; col < columns; col++) {
-                A[row][col] = io::input_value<int>("Введите элемент [" + std::to_string(row) + "][" + std::to_string(col) + "]");
+                arr[row][col] = io::input_value<int>("Введите элемент [" + std::to_string(row) + "][" + std::to_string(col) + "]");
             }
         }
 
-        return A;
+        return arr;
     }
 
-    my_array even_diag_elements(int **A, int rows, int columns) {
-        int max_size = rows > columns ? columns : rows;
+    my_array find_odd_elements_in_even_columns(int **arr, int rows, int columns) {
         my_array res;
 
-        for (unsigned row = 0; row < max_size; row++) {
-            if (!(A[row][row] % 2)) {
-                res.push_back(A[row][row]);
+        for (unsigned col = 0; col < columns; col += 2) {
+            for (unsigned row = 0; row < rows; row++) {
+                if (arr[row][col] % 2) {
+                    res.push_back(arr[row][col]);
+                }
             }
         }
 
         return res;
     }
 
-    int product_of_arr_elements(int *arr, int size) {
-        if (size == 0) return 0;
+    double average(int **arr, int rows, int columns) {
+        double sum = 0L;
 
-        int res = 1;
-
-        for (unsigned i = 0; i < size; i++) {
-            res *= arr[i];
+        for (unsigned row = 0; row < rows; row++) {
+            for (unsigned col = 0; col < columns; col++) {
+                sum += static_cast<double>(arr[row][col]);
+            }
         }
 
-        return res;
+        return sum / (rows * columns);
     }
 
     void print_default_arr(int *arr, int size) {
@@ -112,24 +113,26 @@ namespace task_3 {
         std::println("/////////////////////////");
     }
 
-    void do_task_3() {
+    void do_task_5() {
         int rows = io::input_value<int>("Введите количество строк", "Ошибка", true, 1);
         int columns = io::input_value<int>("Введите количество столбцов", "Ошибка", true, 1);
 
-        int **A = input_arr(rows, columns);
-        print_matrix(A, rows, columns);
+        int **arr = input_arr(rows, columns);
+        double average_of_arr = average(arr, rows, columns);
 
-        my_array even_diag_A_comp = even_diag_elements(A, rows, columns);
+        print_matrix(arr, rows, columns);
+        std::println("Среднее арифметическое: {}", average_of_arr);
 
-        print_default_arr(even_diag_A_comp.data, even_diag_A_comp.size);
+        my_array odd_elements_in_even_columns = find_odd_elements_in_even_columns(arr, rows, columns);
 
-        std::println("Произведение: {}", product_of_arr_elements(even_diag_A_comp.data, even_diag_A_comp.size));
+        std::println("Нечетные элементы в четных столбцах: ");
+        print_default_arr(odd_elements_in_even_columns.data, odd_elements_in_even_columns.size);
 
         for (unsigned row = 0; row < rows; row++) {
-            delete [] A[row];
+            delete [] arr[row];
         }
 
-        delete [] A;
-        A = nullptr;
+        delete [] arr;
+        arr = nullptr;
     }
 }
