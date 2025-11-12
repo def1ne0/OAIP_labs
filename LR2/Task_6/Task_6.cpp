@@ -1,14 +1,14 @@
 #include <iostream>
 #include <cmath>
+
 using namespace std;
 
 int main(){
-    double D, x;
-    cout << "Введите D, x" << endl;
-    cin >> D >> x;
-    double b = x + D;
-    double A = D*x/b;
-    double S = (pow(A, 2) + b*cos(x))/(pow(D, 3) + (A + D - b));
-    cout << "S = " << S << endl;
+    double x, z, k, C, D;
+    cout << "Введите x, z, k, C, D" << endl;
+    cin >> x >> z >> k >> C >> D;
+    double A = log(x) -k;
+    double B = sqrt(z);
+    cout << "Y = " << D*D + C*C/(0.75*A) + B << endl;
 
 }
