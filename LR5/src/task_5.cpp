@@ -31,7 +31,6 @@ namespace task_5 {
 
                 data = new_data;
                 new_data = nullptr;
-
             }
 
             size++;
