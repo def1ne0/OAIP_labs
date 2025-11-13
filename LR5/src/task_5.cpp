@@ -4,51 +4,41 @@
 #include "task_5.h"
 
 namespace task_5 {
-    struct my_array {
-        int *data;
-        int size;
-        int capacity;
+    my_array::my_array() {
+        data = nullptr;
+        size = 0;
+        capacity = 0;
+    }
 
-        my_array() {
-            data = nullptr;
-            size = 0;
-            capacity = 0;
-        }
+    my_array::~my_array() {
+        delete [] data;
+    }
 
-        ~my_array() {
-            delete [] data;
-        }
+    void my_array::push_back(int element) {
+        if (size >= capacity) {
+            capacity = capacity == 0 ? 1 : capacity * 2;
+            int *new_data = new int [capacity];
 
-        void push_back(int element) {
-            if (size >= capacity) {
-                capacity = capacity == 0 ? 1 : capacity * 2;
-                int *new_data = new int [capacity];
-
-                if (data != nullptr) {
-                    std::copy(data, data + size, new_data);
-                    delete [] data;
-                }
-
-                data = new_data;
-                new_data = nullptr;
+            if (data != nullptr) {
+                std::copy(data, data + size, new_data);
+                delete [] data;
             }
 
-            size++;
-            data[size - 1] = element;
+            data = new_data;
+            new_data = nullptr;
         }
 
-        my_array(my_array &&other_array) {
-            data = other_array.data;
-            size = other_array.size;
-            capacity = other_array.capacity;
+        size++;
+        data[size - 1] = element;
+    }
 
-            other_array.data = nullptr;
-        }
+    my_array::my_array(my_array &&other_array) {
+        data = other_array.data;
+        size = other_array.size;
+        capacity = other_array.capacity;
 
-        my_array(const my_array &) = delete;
-        my_array &operator=(my_array &&) = delete;
-        my_array &operator=(const my_array &) = delete;
-    };
+        other_array.data = nullptr;
+    }
 
     int **input_arr(int rows, int columns) {
         int **arr = new int *[rows];
@@ -67,7 +57,7 @@ namespace task_5 {
     my_array find_odd_elements_in_even_columns(int **arr, int rows, int columns) {
         my_array res;
 
-        for (unsigned col = 0; col < columns; col += 2) {
+        for (unsigned col = 1; col < columns; col += 2) {
             for (unsigned row = 0; row < rows; row++) {
                 if (arr[row][col] % 2) {
                     res.push_back(arr[row][col]);
