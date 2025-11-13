@@ -1,7 +1,23 @@
 #pragma once
 
 namespace task_5 {
-    struct my_array;
+    struct my_array {
+        int *data;
+        int size;
+        int capacity;
+
+        my_array();
+
+        ~my_array();
+
+        void push_back(int element);
+
+        my_array(my_array &&other_array);
+
+        my_array(const my_array &) = delete;
+        my_array &operator=(my_array &&) = delete;
+        my_array &operator=(const my_array &) = delete;
+    };
 
     int **input_arr(int, int);
 
