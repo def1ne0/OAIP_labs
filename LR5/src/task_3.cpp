@@ -31,7 +31,6 @@ namespace task_3 {
 
                 data = new_data;
                 new_data = nullptr;
-
             }
 
             size++;
@@ -47,7 +46,7 @@ namespace task_3 {
         }
 
         my_array(const my_array &) = delete;
-        my_array & operator=(my_array &&) = delete;
+        my_array &operator=(my_array &&) = delete;
         my_array &operator=(const my_array &) = delete;
     };
 
