@@ -1,0 +1,3 @@
+/home/define/Документы/cpp_tasks/553502/OAIP/LR6/build/CMakeFiles/LR6.dir
+/home/define/Документы/cpp_tasks/553502/OAIP/LR6/build/CMakeFiles/edit_cache.dir
+/home/define/Документы/cpp_tasks/553502/OAIP/LR6/build/CMakeFiles/rebuild_cache.dir
