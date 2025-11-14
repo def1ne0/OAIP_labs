@@ -1,1 +1,0 @@
-/usr/bin/clang++ -g -fsanitize=address,leak,undefined  -fsanitize=address,leak,undefined -Xlinker --dependency-file=CMakeFiles/LR6.dir/link.d CMakeFiles/LR6.dir/main.cpp.o CMakeFiles/LR6.dir/src/task_1.cpp.o CMakeFiles/LR6.dir/src/run_tasks.cpp.o CMakeFiles/LR6.dir/src/MyStr.cpp.o -o LR6
