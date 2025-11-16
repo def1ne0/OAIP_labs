@@ -12,13 +12,13 @@ namespace str {
     public:
         MyStr();
         MyStr(char *c_str);
-        ~MyStr();
+        ~MyStr() noexcept;
 
         MyStr(const MyStr &other);
-        MyStr(MyStr &&other);
+        MyStr(MyStr &&other) noexcept;
 
         MyStr &operator=(const MyStr &other);
-        MyStr &operator=(MyStr &&other);
+        MyStr &operator=(MyStr &&other) noexcept;
         char &operator[](size_t index) const;
 
         size_t c_str_length(char *c_str) const;
