@@ -6,75 +6,82 @@
 #include <stdexcept>
 
 namespace str {
-    MyStr::MyStr() {
-        this->data = new char [1];
-        this->capacity = 1;
-        this->length = 0;
-
-        data[0] = '\0';
-    }
-
-    MyStr::MyStr(char *c_str) {
-        this->length = std::strlen(c_str);
-        this->capacity = this->length + 1;
-        this->data = new char [this->capacity];
-        std::strcpy(this->data, c_str);
-    }
-
-    MyStr::~MyStr() {
-        delete [] this->data;
-        this->data = nullptr;
-    }
-
-   MyStr::MyStr(const MyStr &other) {
-       this->length = other.length;
-       this->capacity = other.capacity;
-
-       if (other.data != nullptr) {
-           this->data = new char [this->capacity];
-           std::strcpy(this->data, other.data);
-       } else {
-           this->data = new char [1];
-           this->data[0] = '\0';
-       }
-    }
-
-    MyStr::MyStr(MyStr &&other) {
-        this->length = other.length;
-        this->capacity = other.capacity;
-        this->data = other.data;
-
-        other.data = nullptr;
-    }
-
     void MyStr::resize(int new_size) {
         if (new_size <= 0) return;
 
         char *new_data = new char [new_size];
 
-        if (this->data != nullptr) {
-            std::strncpy(new_data, this->data, new_size - 1);
+        if (data_ != nullptr) {
+            std::copy(data_, data_ + length_, new_data);
             new_data[new_size - 1] = '\0';
-            delete [] this->data;
+
+            delete [] data_;
         } else {
             new_data[0] = '\0';
         }
 
-        this->data = new_data;
-        this->capacity = new_size;
+        data_ = new_data;
+        capacity_ = new_size;
 
         new_data = nullptr;
     }
 
+    MyStr::MyStr()
+        : data_(new char [1]), capacity_(1), length_(0){
+
+        data_[0] = '\0';
+    }
+
+    MyStr::MyStr(char *c_str) {
+        length_ = c_str_length(c_str);
+        capacity_ = length_ + 1;
+        data_ = new char [capacity_];
+
+        std::copy(c_str, c_str + length_, data_);
+    }
+
+    MyStr::~MyStr() {
+        delete [] data_;
+        data_ = nullptr;
+    }
+
+   MyStr::MyStr(const MyStr &other)
+        : length_(other.length_), capacity_(other.capacity_) {
+       if (other.data_ != nullptr) {
+           data_ = new char [capacity_];
+           std::copy(other.data_, other.data_ + length_, data_);
+       } else {
+           data_ = new char [1];
+           data_[0] = '\0';
+       }
+    }
+
+    MyStr::MyStr(MyStr &&other)
+        : data_(other.data_), length_(other.length_), capacity_(other.capacity_) {
+
+        other.data_ = nullptr;
+    }
+
+    size_t MyStr::c_str_length(char *c_str) const {
+        size_t length = 0;
+
+        for (unsigned i = 0; c_str[i] != '\0'; i++) {
+            length++;
+        }
+
+        return length;
+    }
+
+
     MyStr &MyStr::operator=(const MyStr &other) {
         if (this != &other) {
-            delete [] this->data;
+            delete [] data_;
 
-            this->length = other.length;
-            this->capacity = other.capacity;
-            this->data = new char [this->capacity];
+            length_ = other.length_;
+            capacity_ = other.capacity_;
+            data_ = new char [capacity_];
 
-            std::strcpy(this->data, other.data);
+            std::copy(other.data_, other.data_ + length_, data_);
         }
 
         return *this;
@@ -82,37 +89,37 @@ namespace str {
 
     MyStr &MyStr::operator=(MyStr &&other) {
         if (this != &other) {
-            delete [] this->data;
+            delete [] data_;
 
-            this->data = other.data;
-            this->length = other.length;
-            this->capacity = other.capacity;
+            data_ = other.data_;
+            length_ = other.length_;
+            capacity_ = other.capacity_;
 
-            other.data = nullptr;
+            other.data_ = nullptr;
         }
 
         return *this;
     }
 
-    char &MyStr::operator[](size_t index) {
-        if (index >= this->length) throw std::out_of_range("индекс вышел за пределы MyStr");
-        return data[index];
+    char &MyStr::operator[](size_t index) const {
+        if (index >= length_ || index < 0) throw std::out_of_range("индекс вышел за пределы MyStr");
+        return data_[index];
     }
 
-    size_t MyStr::get_length() {
-        return this->length;
+    size_t MyStr::length() const {
+        return length_;
     }
 
-    size_t MyStr::get_capacity() {
-        return this->capacity;
+    size_t MyStr::capacity() const {
+        return capacity_;
     }
 
-    char *MyStr::get_c_str() {
-        return this->data;
+    char *MyStr::c_str() const {
+        return data_;
     }
 
-    MyStr MyStr::get_cut_out_str(int start, int end) {
-        if (start < 0 || end >= this->length || start > end) return MyStr();
+    MyStr MyStr::cut_out_str(int start, int end) const {
+        if (start < 0 || end >= length_ || start > end) return MyStr();
 
         MyStr res;
 
@@ -124,61 +131,29 @@ namespace str {
     }
 
     void MyStr::push_back(char element) {
-        if (this->length >= this->capacity - 1) {
-            this->resize(this->capacity == 0 ? 1 : this->capacity * 2);
+        if (length_ >= capacity_ - 1) {
+            this->resize(capacity_ == 0 ? 1 : capacity_ * 2);
         }
 
-        this->data[this->length] = element;
-        this->length++;
-        this->data[this->length] = '\0';
+        data_[length_] = element;
+        length_++;
+        data_[length_] = '\0';
     }
 
-    void MyStr::pop_pack() {
-        if (this->length > 0) {
-            this->length--;
-            this->data[this->length] = '\0';
+    void MyStr::pop() {
+        if (length_ > 0) {
+            length_--;
+            data_[length_] = '\0';
         }
     }
 
     void MyStr::clear() {
-        delete [] this->data;
+        delete [] data_;
 
-        this->data = new char [1];
-        this->data[0] = '\0';
+        data_ = new char [1];
+        data_[0] = '\0';
 
-        this->length = 0;
-        this->capacity = 1;
-    }
-
-
-
-    void MyStr::execute_task_1(int k) {
-        if (k >= this->length) {
-            std::println("Первая подстрока: {}", this->data);
-            std::println("Вторая подстрока: ");
-
-            return;
-        } else {
-            int breakpoint = -1;
-
-            for (int i = k; i >= 0; i--) {
-
-                if ((*this)[i] == ' ') {
-
-                    breakpoint = i;
-                    break;
-                }
-            }
-
-            if (breakpoint == -1) {
-                std::println("Первая подстрока: ");
-                std::println("Вторая подстрока: ");
-
-                return;
-            }
-
-            std::println("Первая подстрока: {}", get_cut_out_str(0, breakpoint - 1).get_c_str());
-            std::println("Вторая подстрока: {}", get_cut_out_str(breakpoint + 1, this->length - 1).get_c_str());
-        }
+        length_ = 0;
+        capacity_ = 1;
     }
 }
