@@ -1,6 +1,5 @@
 #include "MyStr.h"
 
-#include <print>
 #include <cstddef>
 #include <cstring>
 #include <stdexcept>
@@ -40,7 +39,7 @@ namespace str {
         std::copy(c_str, c_str + length_, data_);
     }
 
-    MyStr::~MyStr() {
+    MyStr::~MyStr() noexcept {
         delete [] data_;
         data_ = nullptr;
     }
@@ -56,7 +55,7 @@ namespace str {
        }
     }
 
-    MyStr::MyStr(MyStr &&other)
+    MyStr::MyStr(MyStr &&other) noexcept
         : data_(other.data_), length_(other.length_), capacity_(other.capacity_) {
 
         other.data_ = nullptr;
@@ -87,7 +86,7 @@ namespace str {
         return *this;
     }
 
-    MyStr &MyStr::operator=(MyStr &&other) {
+    MyStr &MyStr::operator=(MyStr &&other) noexcept {
         if (this != &other) {
             delete [] data_;
 
