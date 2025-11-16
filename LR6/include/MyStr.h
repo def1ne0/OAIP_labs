@@ -4,33 +4,32 @@
 
 namespace str {
     class MyStr {
-        private:
-            char *data;
-            size_t length;
-            size_t capacity;
-        public:
-            MyStr();
-            MyStr(char *c_str);
-            ~MyStr();
+        char *data_;
+        size_t length_;
+        size_t capacity_;
 
-            MyStr(const MyStr &other);
-            MyStr(MyStr &&other);
+        void resize(int new_size);
+    public:
+        MyStr();
+        MyStr(char *c_str);
+        ~MyStr();
 
-            MyStr &operator=(const MyStr &other);
-            MyStr &operator=(MyStr &&other);
-            char &operator[](size_t index);
+        MyStr(const MyStr &other);
+        MyStr(MyStr &&other);
 
-            void resize(int new_size);
+        MyStr &operator=(const MyStr &other);
+        MyStr &operator=(MyStr &&other);
+        char &operator[](size_t index) const;
 
-            size_t get_length();
-            size_t get_capacity();
-            char *get_c_str();
-            MyStr get_cut_out_str(int start, int end);
+        size_t c_str_length(char *c_str) const;
 
-            void push_back(char element);
-            void pop_pack();
-            void clear();
+        size_t length() const;
+        size_t capacity() const;
+        char *c_str() const;
+        MyStr cut_out_str(int start, int end) const;
 
-            void execute_task_1(int k);
+        void push_back(char element);
+        void pop();
+        void clear();
     };
 }
