@@ -19,7 +19,7 @@ namespace str {
 
         MyStr &operator=(const MyStr &other);
         MyStr &operator=(MyStr &&other) noexcept;
-        char &operator[](size_t index) const;
+        const char &operator[](size_t index) const;
 
         size_t c_str_length(char *c_str) const;
 
