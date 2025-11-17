@@ -26,17 +26,24 @@ namespace str {
     }
 
     MyStr::MyStr()
-        : data_(new char [1]), capacity_(1), length_(0){
+        : data_(new char [1]), length_(0), capacity_(1){
 
         data_[0] = '\0';
     }
 
     MyStr::MyStr(char *c_str) {
-        length_ = c_str_length(c_str);
-        capacity_ = length_ + 1;
-        data_ = new char [capacity_];
+        if (c_str == nullptr) {
+            data_ = new char [1];
+            data_[0] = '\0';
+            length_ = 0;
+            capacity_ = 1;
+        } else {
+            length_ = c_str_length(c_str);
+            capacity_ = length_ + 1;
+            data_ = new char [capacity_];
 
-        std::copy(c_str, c_str + length_, data_);
+            std::copy(c_str, c_str + length_, data_);
+        }
     }
 
     MyStr::~MyStr() noexcept {
@@ -45,7 +52,7 @@ namespace str {
     }
 
    MyStr::MyStr(const MyStr &other)
-        : length_(other.length_), capacity_(other.capacity_) {
+        : data_(nullptr), length_(other.length_), capacity_(other.capacity_) {
        if (other.data_ != nullptr) {
            data_ = new char [capacity_];
            std::copy(other.data_, other.data_ + length_, data_);
@@ -100,8 +107,8 @@ namespace str {
         return *this;
     }
 
-    char &MyStr::operator[](size_t index) const {
-        if (index >= length_ || index < 0) throw std::out_of_range("индекс вышел за пределы MyStr");
+    const char &MyStr::operator[](size_t index) const {
+        if (index >= length_) throw std::out_of_range("индекс вышел за пределы MyStr");
         return data_[index];
     }
 
