@@ -21,6 +21,7 @@ namespace str {
         MyStr &operator=(MyStr &&other) noexcept;
         char &operator[](size_t index);
         MyStr &operator+=(const MyStr &other);
+        MyStr &operator+=(char *other);
 
         size_t c_str_length(char *c_str) const;
 
@@ -31,6 +32,7 @@ namespace str {
 
         void push_back(char element);
         void concat(const MyStr &other);
+        void concat(char *other_str);
         void pop();
         void clear();
     };

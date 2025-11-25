@@ -50,8 +50,13 @@ namespace task_2 {
     void do_task_2() {
         //char *text = (char *) "SIGMA PENCIL AAAAAAAAAA BBBBB dddddd";
         str::MyStr text = (char *) "SIGMA PENCIL AAAAAAAAAA BBBBB dddddd";
+        str::MyStr sigma = (char *) " ultrasigma";
 
-        execute_task_2(text);
+        text.concat(sigma);
+
+        text += (char *) "pencil";
+
+        std::println("{}", text.c_str());
 
         return;
     }
