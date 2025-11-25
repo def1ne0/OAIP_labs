@@ -39,7 +39,7 @@ namespace str {
             length_ = 0;
             capacity_ = 1;
         } else {
-            length_ = c_str_length(c_str) + 1;
+            length_ = c_str_length(c_str);
             capacity_ = length_ + 1;
             data_ = new char [capacity_];
 
@@ -56,7 +56,7 @@ namespace str {
         : data_(nullptr), length_(other.length_), capacity_(other.capacity_) {
        if (other.data_ != nullptr) {
            data_ = new char [capacity_];
-           std::copy(other.data_, other.data_ + length_, data_);
+           std::copy(other.data_, other.data_ + length_ + 1, data_);
        } else {
            data_ = new char [1];
            data_[0] = '\0';
@@ -79,14 +79,14 @@ namespace str {
 
 
     MyStr &MyStr::operator=(const MyStr &other) {
-        if (this != &other) {
+        if (this != &other){
             delete [] data_;
 
             length_ = other.length_;
             capacity_ = other.capacity_;
             data_ = new char [capacity_];
 
-            std::copy(other.data_, other.data_ + length_, data_);
+            std::copy(other.data_, other.data_ + length_ + 1, data_);
         }
 
         return *this;
@@ -112,9 +112,13 @@ namespace str {
     }
 
     MyStr &MyStr::operator+=(const MyStr &other) {
-        if (this != &other) {
-            this->concat(other);
-        }
+        this->concat(other);
+
+        return *this;
+    }
+
+    MyStr &MyStr::operator+=(char *other) {
+        this->concat(other);
 
         return *this;
     }
@@ -154,9 +158,27 @@ namespace str {
     }
 
     void MyStr::concat(const MyStr &other) {
-        capacity_ += other.capacity_ - 1;
-        std::copy(other.data_, other.data_ + length_, data_ + length_);
-        length_ += other.length_ - 1;
+        if (other.length_ == 0) return;
+
+        resize(length_ + other.length_ + 1);
+
+        std::copy(other.data_, other.data_ + other.length_, data_ + length_);
+        data_[capacity_ - 1] = '\0';
+
+        length_ += other.length_;
+    }
+
+    void MyStr::concat(char *other_str) {
+        size_t other_length = c_str_length(other_str);
+
+        if (other_length == 0) return;
+
+        resize(length_ + other_length + 1);
+
+        std::copy(other_str, other_str + other_length, data_ + length_);
+        data_[capacity_ - 1] = '\0';
+
+        length_ += other_length;
     }
 
     void MyStr::pop() {
