@@ -16,6 +16,7 @@ include_directories(include)
 
 set(SOURCES
     src/task_1.cpp
+    src/task_2.cpp
     src/run_tasks.cpp
     src/MyStr.cpp
 )

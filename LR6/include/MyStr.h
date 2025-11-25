@@ -19,16 +19,18 @@ namespace str {
 
         MyStr &operator=(const MyStr &other);
         MyStr &operator=(MyStr &&other) noexcept;
-        const char &operator[](size_t index) const;
+        char &operator[](size_t index);
+        MyStr &operator+=(const MyStr &other);
 
         size_t c_str_length(char *c_str) const;
 
         size_t length() const;
         size_t capacity() const;
-        char *c_str() const;
+        char *c_str() const; // НЕ ДЕЛИТАЙ ПАМЯТЬ, ТОКА ДЛЯ ВЫВОДА
         MyStr cut_out_str(int start, int end) const;
 
         void push_back(char element);
+        void concat(const MyStr &other);
         void pop();
         void clear();
     };

@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <cstring>
+#include <endian.h>
 #include <stdexcept>
 
 namespace str {
@@ -38,7 +39,7 @@ namespace str {
             length_ = 0;
             capacity_ = 1;
         } else {
-            length_ = c_str_length(c_str);
+            length_ = c_str_length(c_str) + 1;
             capacity_ = length_ + 1;
             data_ = new char [capacity_];
 
@@ -71,9 +72,7 @@ namespace str {
     size_t MyStr::c_str_length(char *c_str) const {
         size_t length = 0;
 
-        for (unsigned i = 0; c_str[i] != '\0'; i++) {
-            length++;
-        }
+        for (; c_str[length] != '\0'; length++);
 
         return length;
     }
@@ -107,9 +106,17 @@ namespace str {
         return *this;
     }
 
-    const char &MyStr::operator[](size_t index) const {
-        if (index >= length_) throw std::out_of_range("индекс вышел за пределы MyStr");
+    char &MyStr::operator[](size_t index) {
+        if (index > length_) throw std::out_of_range("индекс вышел за пределы MyStr");
         return data_[index];
+    }
+
+    MyStr &MyStr::operator+=(const MyStr &other) {
+        if (this != &other) {
+            this->concat(other);
+        }
+
+        return *this;
     }
 
     size_t MyStr::length() const {
@@ -130,7 +137,7 @@ namespace str {
         MyStr res;
 
         for (int i = start; i <= end; i++) {
-            res.push_back((*this)[i]);
+            res.push_back(data_[i]);
         }
 
         return res;
@@ -144,6 +151,12 @@ namespace str {
         data_[length_] = element;
         length_++;
         data_[length_] = '\0';
+    }
+
+    void MyStr::concat(const MyStr &other) {
+        capacity_ += other.capacity_ - 1;
+        std::copy(other.data_, other.data_ + length_, data_ + length_);
+        length_ += other.length_ - 1;
     }
 
     void MyStr::pop() {
