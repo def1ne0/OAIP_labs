@@ -1,6 +1,7 @@
 #include "MyStr.h"
 #include "check_cin.h"
 #include <cstddef>
+#include <print>
 #include "task_1.h"
 
 namespace task_1 {
@@ -25,7 +26,7 @@ namespace task_1 {
 
             if (breakpoint == -1) {
                 std::println("Первая подстрока: ");
-                std::println("Вторая подстрока: ");
+                std::println("Вторая подстрока: {}", input.c_str());
 
                 return;
             }
@@ -78,7 +79,7 @@ namespace task_1 {
 
             if (breakpoint == -1) {
                 std::println("Первая подстрока: ");
-                std::println("Вторая подстрока: ");
+                std::println("Вторая подстрока: {}", input);
 
                 return;
             }
@@ -94,8 +95,24 @@ namespace task_1 {
         }
     }
 
+    void input_str(char *str) {
+        int c;
+        int i {};
+
+        while (i < 79 && (c = getchar()) != EOF && c != '\n') {
+            str[i] = static_cast<char>(c);
+            i++;
+        }
+
+        str[i] = '\0';
+    }
+
     void do_task_1() {
-        str::MyStr some_str = (char *) "Hello world this is a test string";
+        str::MyStr some_str;
+        some_str.input_by_getchar();
+        //char some_str[80];
+        //input_str(some_str);
+
         int k = io::input_value("Введите k", "Ошибка", true, 1);
         //char *some_str = (char *) "Hello world this is a test string";
 

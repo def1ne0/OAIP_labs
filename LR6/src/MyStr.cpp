@@ -1,9 +1,10 @@
 #include "MyStr.h"
 
 #include <cstddef>
+#include <cstdio>
 #include <cstring>
 #include <endian.h>
-#include <stdexcept>
+#include <istream>
 
 namespace str {
     void MyStr::resize(int new_size) {
@@ -13,7 +14,6 @@ namespace str {
 
         if (data_ != nullptr) {
             std::copy(data_, data_ + length_, new_data);
-            new_data[new_size - 1] = '\0';
 
             delete [] data_;
         } else {
@@ -79,7 +79,7 @@ namespace str {
     }
 
 
-    MyStr &MyStr::operator=(const MyStr &other) {
+    MyStr &MyStr::operator = (const MyStr &other) {
         if (this != &other){
             delete [] data_;
 
@@ -93,7 +93,7 @@ namespace str {
         return *this;
     }
 
-    MyStr &MyStr::operator=(MyStr &&other) noexcept {
+    MyStr &MyStr::operator = (MyStr &&other) noexcept {
         if (this != &other) {
             delete [] data_;
 
@@ -107,18 +107,18 @@ namespace str {
         return *this;
     }
 
-    char &MyStr::operator[](size_t index) {
+    char &MyStr::operator [] (size_t index) {
         if (index > length_) throw std::out_of_range("индекс вышел за пределы MyStr");
         return data_[index];
     }
 
-    MyStr &MyStr::operator+=(const MyStr &other) {
+    MyStr &MyStr::operator += (const MyStr &other) {
         this->concat(other);
 
         return *this;
     }
 
-    MyStr &MyStr::operator+=(char *other) {
+    MyStr &MyStr::operator += (char *other) {
         this->concat(other);
 
         return *this;
@@ -132,7 +132,7 @@ namespace str {
         return capacity_;
     }
 
-    char *MyStr::c_str() const {
+    const char *MyStr::c_str() const {
         return data_;
     }
 
@@ -146,6 +146,15 @@ namespace str {
         }
 
         return res;
+    }
+
+    void MyStr::input_by_getchar() {
+        int c;
+        int i {};
+
+        while ((c = getchar()) != EOF && c != '\n') {
+            this->push_back(static_cast<char>(c));
+        }
     }
 
     void MyStr::push_back(char element) {
@@ -197,5 +206,18 @@ namespace str {
 
         length_ = 0;
         capacity_ = 1;
+    }
+
+    std::istream &operator >> (std::istream &in, MyStr &input) {
+        input.clear();
+
+        char c;
+        int i {};
+
+        while (in.get(c) && c != '\n') {
+            input.push_back(c);
+        }
+
+        return in;
     }
 }

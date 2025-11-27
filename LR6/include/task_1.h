@@ -11,5 +11,7 @@ namespace task_1 {
 
     void execute_task_1(char *input, int k);
 
+    void input_str(char *str);
+
     void do_task_1();
 }
