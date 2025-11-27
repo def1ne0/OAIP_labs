@@ -17,7 +17,7 @@ void menu() {
     bool exit = false;
 
     while (!exit) {
-        std::println(" 0 -> Выход\n n -> Запуск n задания (1-5)");
+        std::println(" 0 -> Выход\n n -> Запуск n задания (1-3)");
 
         int choice = io::input_value<int>("Введите пункт меню", "Неверный пункт меню", true, 0, 5);
         const std::string compl_by = "\nВыполнил Финевич Арсений\nВариант 12";
