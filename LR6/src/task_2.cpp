@@ -17,7 +17,7 @@ namespace task_2 {
 
     size_t find_biggest(int *arr, size_t size) {
         int max = arr[0];
-        size_t max_idx = 0;
+        size_t max_idx = -1;
 
         for (size_t i = 1; i < size; i++) {
             if (max < arr[i]) {
@@ -39,6 +39,9 @@ namespace task_2 {
 
         for (size_t i = 0; i < 3; i++) {
             size_t idx_biggest = find_biggest(frequencies, 256);
+
+            if (idx_biggest == -1) break;
+
             std::println("{} по частоте: {}", i + 1, static_cast<char>(idx_biggest));
             frequencies[idx_biggest] = 0;
         }
@@ -54,6 +57,9 @@ namespace task_2 {
 
         for (size_t i = 0; i < 3; i++) {
             size_t idx_biggest = find_biggest(frequencies, 256);
+
+            if (idx_biggest == -1) break;
+
             std::println("{} по частоте: {}", i + 1, static_cast<char>(idx_biggest));
             frequencies[idx_biggest] = 0;
         }
