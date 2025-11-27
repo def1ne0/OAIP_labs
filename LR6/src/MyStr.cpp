@@ -42,6 +42,7 @@ namespace str {
             length_ = c_str_length(c_str);
             capacity_ = length_ + 1;
             data_ = new char [capacity_];
+            data_[length_] = '\0';
 
             std::copy(c_str, c_str + length_, data_);
         }

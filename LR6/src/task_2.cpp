@@ -18,7 +18,7 @@ namespace task_2 {
     }
 
     void execute_task_2(str::MyStr text) {
-        int frequencies[128] {0};
+        int frequencies[256] {0};
 
         for (size_t i = 0; text[i] != '\0'; i++) {
             unsigned char element = text[i];
@@ -33,7 +33,7 @@ namespace task_2 {
     }
 
     void execute_task_2(char *text) {
-        int frequencies[128] {0};
+        int frequencies[256] {0};
 
         for (size_t i = 0; text[i] != '\0'; i++) {
             unsigned char element = text[i];
@@ -48,15 +48,10 @@ namespace task_2 {
     }
 
     void do_task_2() {
-        //char *text = (char *) "SIGMA PENCIL AAAAAAAAAA BBBBB dddddd";
-        str::MyStr text = (char *) "SIGMA PENCIL AAAAAAAAAA BBBBB dddddd";
-        str::MyStr sigma = (char *) " ultrasigma";
+        //char *text = (char *) "Hello world this is a test string";
+        str::MyStr text = (char *) "Hello world this is a test string";
 
-        text.concat(sigma);
-
-        text += (char *) "pencil";
-
-        std::println("{}", text.c_str());
+        execute_task_2(text);
 
         return;
     }
