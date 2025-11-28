@@ -5,6 +5,7 @@
 #include <cstring>
 #include <endian.h>
 #include <istream>
+#include <optional>
 #include <stdexcept>
 
 namespace str {
@@ -149,8 +150,8 @@ namespace str {
         return res;
     }
 
-    int MyStr::to_unsigned_int() const {
-        if (length_ == 0) return 0;
+    std::optional<int> MyStr::to_unsigned_int() const {
+        if (length_ == 0) return std::nullopt;
 
         int num {};
 
@@ -158,7 +159,7 @@ namespace str {
             if (data_[i] >= '0' && data_[i] <= '9') {
                 num = num * 10 + (data_[i] - '0');
             } else {
-                throw std::invalid_argument("далбаеб это не число");
+                return std::nullopt;
             }
         }
 

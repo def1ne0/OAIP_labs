@@ -1,7 +1,6 @@
 #include "c_str_utils.h"
 #include <cstdio>
-#include <print>
-#include <stdexcept>
+#include <optional>
 
 namespace c_str {
     char *cut_c_str(char *input, int start, int end) {
@@ -26,25 +25,13 @@ namespace c_str {
         return res;
     }
 
-    void input_str(char *str, bool int_needed) {
+    void input_str(char *str) {
         int c;
         int i {};
 
-        if (!int_needed) {
-            while (i < 79 && (c = getchar()) != EOF && c != '\n') {
-                str[i] = static_cast<char>(c);
-                i++;
-            }
-        } else {
-            while (i < 79 && (c = getchar()) != EOF && c != '\n') {
-                if (!is_number(c)) {
-                    std::println("Был введен символ, не являющийся цифрой. Символы после него были проигнорированы");
-                    break;
-                }
-
-                str[i] = static_cast<char>(c);
-                i++;
-            }
+        while (i < 79 && (c = getchar()) != EOF && c != '\n') {
+            str[i] = static_cast<char>(c);
+            i++;
         }
 
         str[i] = '\0';
@@ -60,10 +47,10 @@ namespace c_str {
         str[0] = '\0';
     }
 
-    int to_unsigned_int(char *str) {
+    std::optional<int> to_unsigned_int(char *str) {
         size_t len = find_length(str);
 
-        if (len == 0) return 0;
+        if (len == 0) return std::nullopt;
 
         int num {};
 
@@ -71,7 +58,7 @@ namespace c_str {
             if (str[i] >= '0' && str[i] <= '9') {
                 num = num * 10 + (str[i] - '0');
             } else {
-                throw std::invalid_argument("далбаеб это не число");
+                return std::nullopt;
             }
         }
 
