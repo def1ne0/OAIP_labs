@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstddef>
 #include <istream>
+#include <optional>
 
 namespace str {
     class MyStr {
@@ -31,7 +32,7 @@ namespace str {
         size_t capacity() const;
         const char *c_str() const; // НЕ ДЕЛИТАЙ ПАМЯТЬ, ТОКА ДЛЯ ВЫВОДА
         MyStr cut_out_str(int start, int end) const;
-        int to_unsigned_int() const;
+        std::optional<int> to_unsigned_int() const;
 
 
         void input_by_getchar();
