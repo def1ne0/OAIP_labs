@@ -86,7 +86,7 @@ namespace task_3 {
 
         //str::MyStr input;
 
-        std::println("Введите строку без пробелов: ");
+        std::println("Введите строку");
 
         c_str::input_str(input);
 
