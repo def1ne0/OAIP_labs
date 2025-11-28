@@ -3,32 +3,9 @@
 
 #include "task_3.h"
 #include "MyStr.h"
+#include "c_str_utils.h"
 
 namespace task_3 {
-    bool is_number(char c) {
-        return c >= '0' && c <= '9';
-    }
-
-    size_t find_length(char *input) {
-        size_t res = 0;
-
-        for (; input[res] != '\0'; res++);
-
-        return res;
-    }
-
-    void input_str(char *str) {
-        int c;
-        int i {};
-
-        while (i < 79 && (c = getchar()) != EOF && c != '\n') {
-            str[i] = static_cast<char>(c);
-            i++;
-        }
-
-        str[i] = '\0';
-    }
-
     void execute_task_3(str::MyStr input) {
         size_t left = 0;
         size_t right = 0;
@@ -40,7 +17,7 @@ namespace task_3 {
             if (static_cast<int>(input[left]) == 46) {
                 left++;
 
-                while (left < input.length() && is_number(input[left])) {
+                while (left < input.length() && c_str::is_number(input[left])) {
                     left++;
                 }
 
@@ -49,11 +26,11 @@ namespace task_3 {
                 continue;
             }
 
-            if (!is_number(input[left])) continue;
+            if (!c_str::is_number(input[left])) continue;
 
             int num = input[left] - '0';
 
-            while (right < input.length() && is_number(input[right])) {
+            while (right < input.length() && c_str::is_number(input[right])) {
                 num = num * 10 + (input[right] - '0');
                 right++;
             }
@@ -67,7 +44,7 @@ namespace task_3 {
     }
 
     void execute_task_3(char *input) {
-        size_t len = find_length(input);
+        size_t len = c_str::find_length(input);
         size_t left = 0;
         size_t right = 0;
         int max_num = -1; //-1 вернет если не найдено
@@ -78,7 +55,7 @@ namespace task_3 {
             if (static_cast<int>(input[left]) == 46) {
                 left++;
 
-                while (left < len && is_number(input[left])) {
+                while (left < len && c_str::is_number(input[left])) {
                     left++;
                 }
 
@@ -87,11 +64,11 @@ namespace task_3 {
                 continue;
             }
 
-            if (!is_number(input[left])) continue;
+            if (!c_str::is_number(input[left])) continue;
 
             int num = input[left] - '0';
 
-            while (right < len && is_number(input[right])) {
+            while (right < len && c_str::is_number(input[right])) {
                 num = num * 10 + (input[right] - '0');
                 right++;
             }
@@ -105,15 +82,15 @@ namespace task_3 {
     }
 
     void do_task_3() {
-        //char input[80];
+        char input[80];
 
-        str::MyStr input;
+        //str::MyStr input;
 
         std::println("Введите строку без пробелов: ");
 
-        //input_str(input);
+        c_str::input_str(input);
 
-        input.input_by_getchar();
+        //input.input_by_getchar();
 
         execute_task_3(input);
 

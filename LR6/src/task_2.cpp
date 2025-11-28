@@ -1,20 +1,9 @@
 #include <print>
 
 #include "MyStr.h"
+#include "c_str_utils.h"
 
 namespace task_2 {
-    void input_str(char *str) {
-        int c;
-        int i {};
-
-        while (i < 79 && (c = getchar()) != EOF && c != '\n') {
-            str[i] = static_cast<char>(c);
-            i++;
-        }
-
-        str[i] = '\0';
-    }
-
     size_t find_biggest(int *arr, size_t size) {
         int max = arr[0];
         size_t max_idx = -1;
@@ -66,14 +55,14 @@ namespace task_2 {
     }
 
     void do_task_2() {
-        //char text[80];
-        str::MyStr text;
+        char text[80];
+        //str::MyStr text;
 
         std::println("Введите текст");
 
-        //input_str(text);
+        c_str::input_str(text);
 
-        text.input_by_getchar();
+        //text.input_by_getchar();
 
         execute_task_2(text);
 

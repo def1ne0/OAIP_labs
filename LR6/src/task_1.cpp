@@ -1,8 +1,9 @@
 #include "MyStr.h"
-#include "check_cin.h"
 #include <cstddef>
 #include <print>
+#include <stdexcept>
 #include "task_1.h"
+#include "c_str_utils.h"
 
 namespace task_1 {
     void execute_task_1(str::MyStr input, int k) {
@@ -36,30 +37,8 @@ namespace task_1 {
         }
     }
 
-    char *cut_c_str(char *input, int start, int end) { // НЕ ЗАБУДЬ ОСВОБОДИТЬ ПАМЯТЬ
-        char *res = new char [end - start + 2];
-        size_t idx = 0;
-
-        for (int i = start; i <= end; i++) {
-            res[idx] = input[i];
-            idx++;
-        }
-
-        res[end - start + 1] = '\0';
-
-        return res;
-    }
-
-    size_t find_length(char *input) {
-        size_t res = 0;
-
-        for (; input[res] != '\0'; res++);
-
-        return res;
-    }
-
     void execute_task_1(char *input, int k) {
-        size_t len = find_length(input);
+        size_t len = c_str::find_length(input);
 
         if (k >= len) {
             std::println("Первая подстрока: {}", input);
@@ -84,8 +63,8 @@ namespace task_1 {
                 return;
             }
 
-            char *first = cut_c_str(input, 0, breakpoint - 1);
-            char *second = cut_c_str(input, breakpoint + 1, len - 1);
+            char *first = c_str::cut_c_str(input, 0, breakpoint - 1);
+            char *second = c_str::cut_c_str(input, breakpoint + 1, len - 1);
 
             std::println("Первая подстрока: {}", first);
             std::println("Вторая подстрока: {}", second);
@@ -95,25 +74,28 @@ namespace task_1 {
         }
     }
 
-    void input_str(char *str) {
-        int c;
-        int i {};
+    void do_task_1() {
+        //str::MyStr some_str;
+        //some_str.input_by_getchar();
+        char some_str[80];
+        char input_k[80];
+        int k {};
 
-        while (i < 79 && (c = getchar()) != EOF && c != '\n') {
-            str[i] = static_cast<char>(c);
-            i++;
+        std::println("Введите строку");
+        c_str::input_str(some_str);
+
+        std::println("Введите целое число k");
+        c_str::input_str(input_k);
+
+        try {
+            k = c_str::to_unsigned_int(some_str);
+        } catch (const std::invalid_argument &e) {
+            std::println("{}", e.what());
+            return;
         }
 
-        str[i] = '\0';
-    }
+        std::println("Str: {}, k: {}", some_str, k);
 
-    void do_task_1() {
-        str::MyStr some_str;
-        some_str.input_by_getchar();
-        //char some_str[80];
-        //input_str(some_str);
-
-        int k = io::input_value("Введите k", "Ошибка", true, 1);
         //char *some_str = (char *) "Hello world this is a test string";
 
         execute_task_1(some_str, k);

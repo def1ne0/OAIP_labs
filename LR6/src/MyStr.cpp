@@ -5,6 +5,7 @@
 #include <cstring>
 #include <endian.h>
 #include <istream>
+#include <stdexcept>
 
 namespace str {
     void MyStr::resize(int new_size) {
@@ -146,6 +147,22 @@ namespace str {
         }
 
         return res;
+    }
+
+    int MyStr::to_unsigned_int() const {
+        if (length_ == 0) return 0;
+
+        int num {};
+
+        for (size_t i = 0; i < length_; i++) {
+            if (data_[i] >= '0' && data_[i] <= '9') {
+                num = num * 10 + (data_[i] - '0');
+            } else {
+                throw std::invalid_argument("далбаеб это не число");
+            }
+        }
+
+        return num;
     }
 
     void MyStr::input_by_getchar() {
