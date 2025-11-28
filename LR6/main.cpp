@@ -1,7 +1,9 @@
+#include <cstdio>
 #include <print>
-#include <string>
+#include <pthread.h>
 
-#include "check_cin.h"
+#include "MyStr.h"
+#include "c_str_utils.h"
 #include "task_1.h"
 #include "task_2.h"
 #include "task_3.h"
@@ -19,13 +21,23 @@ void menu() {
     while (!exit) {
         std::println(" 0 -> Выход\n n -> Запуск n задания (1-3)");
 
-        int choice = io::input_value<int>("Введите пункт меню", "Неверный пункт меню", true, 0, 5);
-        const std::string compl_by = "\nВыполнил Финевич Арсений\nВариант 12";
-        const std::vector<std::string> essence = {
-            "Дана строка, состоящая из слов, разделенных пробелами. Разбить исходную строку на две подстроки, причем первая длиной k символов, если на k-ю позицию попадает слово, то его следует отнести ко второй строке. Значение k вводится с клавиатуры.",
-            "В тексте найти и напечатать символы, встречающиеся наиболее часто.",
-            "Ввести строку и определить наибольшее записанное в этой строке целую часть числа (без учета знака числа)."
-        };
+        str::MyStr input;
+        int choice;
+        bool is_correct = false;
+
+        while (!is_correct) {
+            std::println("Введите пункт меню");
+            input.input_by_getchar();
+
+            if (input.length() == 1 && input[0] <= '3' && input[0] >= '0') {
+                is_correct = true;
+            } else {
+                std::println("Неверный пункт меню");
+                input.clear();
+            }
+        }
+
+        choice = input.to_unsigned_int();
 
         void (*tasks_list[5]) () = {
             task_1::do_task_1,
@@ -38,7 +50,7 @@ void menu() {
                 exit = true;
                 break;
             default:
-                tasks::run_task(choice, tasks_list, essence, compl_by);
+                tasks::run_task(choice, tasks_list);
         }
     }
 }

@@ -20,6 +20,7 @@ set(SOURCES
     src/task_3.cpp
     src/run_tasks.cpp
     src/MyStr.cpp
+    src/c_str_utils.cpp
 )
 
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
