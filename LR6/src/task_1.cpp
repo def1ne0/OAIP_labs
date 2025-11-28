@@ -94,10 +94,6 @@ namespace task_1 {
             return;
         }
 
-        std::println("Str: {}, k: {}", some_str, k);
-
-        //char *some_str = (char *) "Hello world this is a test string";
-
         execute_task_1(some_str, k);
 
         return;
