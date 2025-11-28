@@ -15,8 +15,6 @@ namespace task_5 {
         my_array(my_array &&other_array);
 
         my_array(const my_array &) = delete;
-        my_array &operator=(my_array &&) = delete;
-        my_array &operator=(const my_array &) = delete;
     };
 
     int **input_arr(int, int);
