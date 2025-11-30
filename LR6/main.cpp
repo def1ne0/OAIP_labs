@@ -41,7 +41,7 @@ void menu() {
             }
         }
 
-        void (*tasks_list[5]) () = {
+        void (*tasks_list[3]) () = {
             task_1::do_task_1,
             task_2::do_task_2,
             task_3::do_task_3
