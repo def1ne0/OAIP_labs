@@ -5,6 +5,7 @@
 #include "check_cin.h"
 #include "run_tasks.h"
 #include "task_1.h"
+#include "task_2.h"
 
 void menu();
 
@@ -16,7 +17,8 @@ void menu() {
     bool exit = false;
 
     void (*tasks_list[5]) () = {
-        task_1::do_task_1
+        task_1::do_task_1,
+        task_2::do_task_2
     };
 
     while (!exit) {
