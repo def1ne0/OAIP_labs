@@ -21,6 +21,8 @@ set(SOURCES
     src/task_1.cpp
     src/task_2.cpp
     src/task_3.cpp
+    src/task_4.cpp
+    src/task_5.cpp
 )
 
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES})

@@ -7,6 +7,8 @@
 #include "task_1.h"
 #include "task_2.h"
 #include "task_3.h"
+#include "task_4.h"
+#include "task_5.h"
 
 void menu();
 
@@ -20,7 +22,9 @@ void menu() {
     void (*tasks_list[5]) () = {
         task_1::do_task_1,
         task_2::do_task_2,
-        task_3::do_task3
+        task_3::do_task3,
+        task_4::do_task_4,
+        task_5::do_task_5
     };
 
     while (!exit) {
