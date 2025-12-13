@@ -27,16 +27,15 @@ void init_flight_array(Flight **flights, int *size);
 void free_flight_array(Flight **flights);
 void input_flights(Flight **flights, int *size);
 void display_flights(Flight *flights, int size);
-void add_flight(Flight **flights, int *size);
-void search_and_display_by_destination(Flight *flights, int size);
+void search_by_destination(Flight *flights, int size);
 void delete_flight_by_number(Flight **flights, int *size);
 void update_flight_by_number(Flight *flights, int size);
 void sort_flights_by_departure_time(Flight *flights, int size);
 void print_menu();
 
-void save_flights_to_binary_file(Flight *flights, int size, const char *filename);
-void load_flights_from_binary_file(Flight **flights, int *size, const char *filename);
-void correct_flight_in_binary_file(const char *filename, int flight_number_to_correct);
+void save_flights_to_binary_file(Flight *flights, int size);
+void load_flights_from_binary_file(Flight **flights, int *size);
+void update_flight_in_binary_file(void);
 
 #ifdef __cplusplus
 }
