@@ -4,23 +4,56 @@
 #include <stdlib.h>
 #include <string.h>
 
+static void clear_buff() {
+    int c;
+
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+static void input_unsigned(int *input) {
+    while (true) {
+        if (scanf("%d", input) && *input > 0) {
+            clear_buff();
+
+            return;
+        } else {
+            printf("Введите положительное число\n");
+
+            clear_buff();
+        }
+    }
+}
+
+void input_non_negative_int(int *input) {
+    while (true) {
+        if (scanf("%d", input) && *input >= 0) {
+            clear_buff();
+
+            return;
+        } else {
+            printf("Введите неотрицательное число\n");
+
+            clear_buff();
+        }
+    }
+}
+
 void init_flight_array(Flight **flights, int *size) {
     *size = 0;
     *flights = NULL;
 }
 
-void free_flight_array(Flight **flights) {
-    if (*flights != NULL) {
-        free(*flights);
-        *flights = NULL;
-    }
+void destroy_flight_array(Flight **flights, int *size) {
+    free(*flights);
+    *flights = NULL;
+    *size = 0;
 }
 
 void input_flights(Flight **flights, int *size) {
     int count;
 
     printf("Введите количество рейсов: ");
-    scanf("%d", &count);
+    input_unsigned(&count);
 
     *flights = realloc(*flights, (*size + count) * sizeof(Flight));
 
@@ -33,16 +66,22 @@ void input_flights(Flight **flights, int *size) {
         printf("\n -> Ввод рейса #%d \n", *size + i + 1);
 
         printf("Номер рейса: ");
-        scanf("%d", &(*flights)[*size + i].flight_number);
+        input_unsigned(&(*flights)[*size + i].flight_number);
 
         printf("\nТип самолета: ");
-        scanf("%s", (*flights)[*size + i].aircraft_type);
+        scanf("%49s", (*flights)[*size + i].aircraft_type);
+        clear_buff();
 
         printf("\nПункт назначения: ");
-        scanf("%s", (*flights)[*size + i].destination);
+        scanf("%99s", (*flights)[*size + i].destination);
+        clear_buff();
 
         printf("\nВремя вылета (в минутах с начала суток, например, 830 для 13:50): ");
-        scanf("%d", &(*flights)[*size + i].departure_time);
+        input_unsigned(&(*flights)[*size + i].departure_time);
+
+        int hours = (*flights)[*size + i].departure_time / 60;
+        int minutes = (*flights)[*size + i].departure_time % 60;
+        sprintf((*flights)[*size + i].time_data.time_string, "%02d:%02d", hours, minutes);
     }
 
     *size += count;
@@ -70,7 +109,8 @@ void display_flights(Flight *flights, int size) {
 void search_by_destination(Flight *flights, int size) {
     char target_dest[100];
     printf("Введите пункт назначения для поиска: ");
-    scanf("%s", target_dest);
+    scanf("%99s", target_dest);
+    clear_buff();
 
     bool found = false;
     printf("\n *** Рейсы в пункт назначения %s ***\n", target_dest);
@@ -93,13 +133,13 @@ void search_by_destination(Flight *flights, int size) {
 void delete_flight_by_number(Flight **flights, int *size) {
     int inputed_index;
     printf("Введите рейс для удаления: ");
-    scanf("%d", &inputed_index);
+    input_unsigned(&inputed_index);
 
     int index = -1;
 
     for (int i = 0; i < *size; i++) {
         if ((*flights)[i].flight_number == inputed_index) {
-            index = inputed_index;
+            index = i;
             break;
         }
     }
@@ -127,7 +167,7 @@ void delete_flight_by_number(Flight **flights, int *size) {
 void update_flight_by_number(Flight *flights, int size) {
     int inputed_index;
     printf("Введите номер рейса для изменения: ");
-    scanf("%d", &inputed_index);
+    input_unsigned(&inputed_index);
 
     int index = -1;
 
@@ -154,16 +194,22 @@ void update_flight_by_number(Flight *flights, int size) {
     printf("*** Введите новые данные ***\n");
 
     printf("Номер рейса: ");
-    scanf("%d", &flights[index].flight_number);
+    input_unsigned(&flights[index].flight_number);
 
     printf("\nТип самолета: ");
-    scanf("%s", flights[index].aircraft_type);
+    scanf("%49s", flights[index].aircraft_type);
+    clear_buff();
 
     printf("\nПункт назначения: ");
-    scanf("%s", flights[index].destination);
+    scanf("%99s", flights[index].destination);
+    clear_buff();
 
     printf("\nВремя вылета (в минутах с начала суток, например, 830 для 13:50): ");
-    scanf("%d", &flights[index].departure_time);
+    input_unsigned(&flights[index].departure_time);
+
+    int hours = flights[index].departure_time / 60;
+    int minutes = flights[index].departure_time % 60;
+    sprintf(flights[index].time_data.time_string, "%02d:%02d", hours, minutes);
 
     printf("Данные рейса #%d обновлены\n", inputed_index);
 }
@@ -212,7 +258,8 @@ void sort_flights_by_departure_time(Flight *flights, int size) {
 void save_flights_to_binary_file(Flight *flights, int size) {
     char filename[100];
     printf("Введите название файла, в который буду записаны данные: ");
-    scanf("%s", filename);
+    scanf("%99s", filename);
+    clear_buff();
 
     FILE *file = fopen(filename, "wb");
 
@@ -233,9 +280,12 @@ void save_flights_to_binary_file(Flight *flights, int size) {
 }
 
 void load_flights_from_binary_file(Flight **flights, int *size) {
+    destroy_flight_array(flights, size);
+
     char filename[100];
     printf("Введите название бинарного файла, который хотите загрузить: ");
-    scanf("%s", filename);
+    scanf("%99s", filename);
+    clear_buff();
 
     FILE *file = fopen(filename, "rb");
 
@@ -267,10 +317,11 @@ void update_flight_in_binary_file() {
     int flight_number_to_correct;
     char filename[100];
     printf("Введите название файла для корректровки: ");
-    scanf("%s", filename);
+    scanf("%99s", filename);
+    clear_buff();
 
     printf("Введите номер рейса для корректировки: ");
-    scanf("%d", &flight_number_to_correct);
+    input_unsigned(&flight_number_to_correct);
 
     FILE *file = fopen(filename, "r+b");
 
@@ -285,8 +336,10 @@ void update_flight_in_binary_file() {
     bool found = false;
 
     for (int i = 0; i < size; i++) {
+        fseek(file, sizeof(int) + i * sizeof(Flight), SEEK_SET);
+
         Flight current_flight;
-        fread(&current_flight, sizeof(Flight), size, file);
+        fread(&current_flight, sizeof(Flight), 1, file);
 
         if (current_flight.flight_number == flight_number_to_correct) {
             printf("*** Текущие данные рейса ***\n");
@@ -300,13 +353,15 @@ void update_flight_in_binary_file() {
             printf("*** Введите новые данные ***\n");
 
             printf("\nТип самолета: ");
-            scanf("%s", current_flight.aircraft_type);
+            scanf("%49s", current_flight.aircraft_type);
+            clear_buff();
 
             printf("\nПункт назначения: ");
-            scanf("%s", current_flight.destination);
+            scanf("%99s", current_flight.destination);
+            clear_buff();
 
             printf("\nВремя вылета (в минутах с начала суток, например, 830 для 13:50): ");
-            scanf("%d", &current_flight.departure_time);
+            input_unsigned(&current_flight.departure_time);
 
             int hours = current_flight.departure_time / 60;
             int minutes = current_flight.departure_time % 60;
@@ -315,7 +370,7 @@ void update_flight_in_binary_file() {
             fseek(file, sizeof(int) + i * sizeof(Flight), SEEK_SET);
             fwrite(&current_flight, sizeof(Flight), 1, file);
 
-            printf("Рейс #%d успешно скорректирован в файле %s\n", flight_number_to_correct, filename);
+            printf("Рейс #%d успешнzо скорректирован в файле %s\n", flight_number_to_correct, filename);
             found = true;
             break;
         }

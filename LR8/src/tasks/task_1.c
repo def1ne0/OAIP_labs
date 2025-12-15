@@ -11,7 +11,7 @@ int main() {
 
     do {
         print_menu();
-        scanf("%d", &choice);
+        input_non_negative_int(&choice);
 
         switch (choice) {
             case 1:
@@ -21,6 +21,7 @@ int main() {
                 display_flights(flights, size);
                 break;
             case 3:
+                destroy_flight_array(&flights, &size);
                 input_flights(&flights, &size);
                 break;
             case 4:
@@ -52,7 +53,7 @@ int main() {
         }
     } while (choice != 0);
 
-    free_flight_array(&flights);
+    destroy_flight_array(&flights, &size);
 
     return 0;
 }

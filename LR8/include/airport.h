@@ -23,8 +23,10 @@ typedef struct {
 // **flights - указатель на указатель на первый элемент массива flights, чтобы изменять массив исходный,
 // ведь Flight *flights копируется
 
+void input_non_negative_int(int *input);
+
 void init_flight_array(Flight **flights, int *size);
-void free_flight_array(Flight **flights);
+void destroy_flight_array(Flight **flights, int *size);
 void input_flights(Flight **flights, int *size);
 void display_flights(Flight *flights, int size);
 void search_by_destination(Flight *flights, int size);
