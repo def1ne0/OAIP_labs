@@ -19,8 +19,8 @@ add_executable(railway_station src/tasks/task_2.c)
 target_include_directories(airport PRIVATE include)
 target_include_directories(railway_station PRIVATE include)
 
-target_sources(airport PRIVATE src/airport.c)
-target_sources(railway_station PRIVATE src/railway_station.c)
+target_sources(airport PRIVATE src/airport.c src/input_utils.c)
+target_sources(railway_station PRIVATE src/railway_station.c src/input_utils.c)
 
 add_custom_target(airport-task
     COMMAND airport
@@ -28,6 +28,6 @@ add_custom_target(airport-task
 )
 
 add_custom_target(railway-station-task
-    COMMAND station
+    COMMAND railway_station
     DEPENDS railway_station
 )

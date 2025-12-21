@@ -3,7 +3,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif // __cplusplus
 
 #include <stdbool.h>
 
@@ -41,6 +41,6 @@ void update_flight_in_binary_file(void);
 
 #ifdef __cplusplus
 }
-#endif
+#endif // __cplusplus
 
 #endif // AIRPORT_H

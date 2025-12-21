@@ -1,42 +1,10 @@
-#include "airport.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-static void clear_buff() {
-    int c;
-
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
-static void input_unsigned(int *input) {
-    while (true) {
-        if (scanf("%d", input) && *input > 0) {
-            clear_buff();
-
-            return;
-        } else {
-            printf("Введите положительное число\n");
-
-            clear_buff();
-        }
-    }
-}
-
-void input_non_negative_int(int *input) {
-    while (true) {
-        if (scanf("%d", input) && *input >= 0) {
-            clear_buff();
-
-            return;
-        } else {
-            printf("Введите неотрицательное число\n");
-
-            clear_buff();
-        }
-    }
-}
+#include "airport.h"
+#include "input_utils.h"
 
 void init_flight_array(Flight **flights, int *size) {
     *size = 0;
@@ -65,8 +33,7 @@ void input_flights(Flight **flights, int *size) {
     for (int i = 0; i < count; i++) {
         printf("\n -> Ввод рейса #%d \n", *size + i + 1);
 
-        printf("Номер рейса: ");
-        input_unsigned(&(*flights)[*size + i].flight_number);
+        (*flights)[*size + i].flight_number = *size + i + 1;
 
         printf("\nТип самолета: ");
         scanf("%49s", (*flights)[*size + i].aircraft_type);
@@ -92,6 +59,7 @@ void input_flights(Flight **flights, int *size) {
 void display_flights(Flight *flights, int size) {
     if (size == 0) {
         printf("Массив пуст\n");
+        return;
     }
 
     printf("*** Список всех рейсов ***\n");
@@ -146,6 +114,7 @@ void delete_flight_by_number(Flight **flights, int *size) {
 
     if (index == -1) {
         printf("Рейс #%d не найден\n", inputed_index);
+        return;
     }
 
     for (int i = index; i < *size - 1; i++) {
@@ -193,8 +162,7 @@ void update_flight_by_number(Flight *flights, int size) {
 
     printf("*** Введите новые данные ***\n");
 
-    printf("Номер рейса: ");
-    input_unsigned(&flights[index].flight_number);
+    printf(" -> Рейс #%d \n", inputed_index);
 
     printf("\nТип самолета: ");
     scanf("%49s", flights[index].aircraft_type);
@@ -370,7 +338,7 @@ void update_flight_in_binary_file() {
             fseek(file, sizeof(int) + i * sizeof(Flight), SEEK_SET);
             fwrite(&current_flight, sizeof(Flight), 1, file);
 
-            printf("Рейс #%d успешнzо скорректирован в файле %s\n", flight_number_to_correct, filename);
+            printf("Рейс #%d успешно скорректирован в файле %s\n", flight_number_to_correct, filename);
             found = true;
             break;
         }
