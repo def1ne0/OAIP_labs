@@ -1,6 +1,11 @@
 #include <stdio.h>
 
+#include "input_utils.h"
 #include "railway_station.h"
+
+static int non_negative_cond (int *input) {
+    return *input >= 0;
+}
 
 int main() {
     Bus *buses = NULL;
@@ -11,7 +16,7 @@ int main() {
 
     do {
         print_menu();
-        input_non_negative_int(&choice);
+        input_int(&choice, &non_negative_cond);
 
         switch (choice) {
             case 1:

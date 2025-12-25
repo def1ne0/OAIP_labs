@@ -9,6 +9,20 @@ void clear_buff() {
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
+void input_int(int *input, int (*condition) (int *)) {
+    while (true) {
+        if (scanf("%d", input) && condition(input)) {
+            clear_buff();
+
+            return;
+        } else {
+            printf("Ошибка. Повторите ввод\n");
+
+            clear_buff();
+        }
+    }
+}
+
 void input_unsigned(int *input) {
     while (true) {
         if (scanf("%d", input) && *input > 0) {
