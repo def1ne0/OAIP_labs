@@ -196,7 +196,7 @@ static int compare(const void *a, const void *b) {
         int i = low - 1;
 
         for (int j = low; j < high; j++) {
-            if (flights[i].departure_time <= item) {
+            if (flights[j].departure_time <= item) {
                 i++;
                 Flight temp = flights[i];
                 flights[i] = flights[j];

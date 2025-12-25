@@ -198,14 +198,13 @@ static int compare(const void *a, const void *b) {
     return first->departure_time - second->departure_time;
 }
 
-/*static void quick_sort_buses(Bus *buses, int low, int high) {
-
+static void quick_sort_buses(Bus *buses, int low, int high) {
     if (low < high) {
         int item = buses[high].departure_time;
         int i = low - 1;
 
         for (int j = low; j < high; j++) {
-            if (buses[i].departure_time <= item) {
+            if (buses[j].departure_time <= item) {
                 i++;
                 Bus temp = buses[i];
                 buses[i] = buses[j];
@@ -220,7 +219,7 @@ static int compare(const void *a, const void *b) {
         quick_sort_buses(buses, low, i);
         quick_sort_buses(buses, i + 2, high);
     }
-} */
+}
 
 void sort_buses_by_departure_time(Bus *buses, int size) {
     if (size <= 1) {
@@ -228,7 +227,8 @@ void sort_buses_by_departure_time(Bus *buses, int size) {
         return;
     }
 
-    qsort(buses, size, sizeof(Bus), compare);
+    quick_sort_buses(buses, 0, size - 1);
+    //qsort(buses, size, sizeof(Bus), compare);
     printf("Массив успешно отсортирован по времени отправления по возрастанию\n");
 }
 
