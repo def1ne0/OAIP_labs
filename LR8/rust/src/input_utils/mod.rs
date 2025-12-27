@@ -29,7 +29,7 @@ pub fn input_str(text: &str, input: &mut String) {
 
         match std::io::stdin().read_line(&mut buffer) {
             Ok(_) => {
-                *input = buffer.trim().to_owned().to_string();
+                *input = buffer.trim().to_string();
                 break;
             },
             Err(_) => {
