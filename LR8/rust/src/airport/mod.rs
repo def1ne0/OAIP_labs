@@ -13,8 +13,8 @@ pub mod airport_schedule {
         fn new() -> Self {
             Flight { 
                 flight_number: 0, 
-                aircraft_type: "".to_string(), 
-                destination: "".to_string(), 
+                aircraft_type: String::new(), 
+                destination: String::new(), 
                 departure_time: 0,
             }
         }
