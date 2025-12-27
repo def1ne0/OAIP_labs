@@ -13,8 +13,12 @@ set(CMAKE_EXE_LINKER_FLAGS_DEBUG
 
 include_directories(include)
 
-add_executable(airport src/tasks/task_1.c)
-add_executable(railway_station src/tasks/task_2.c)
+add_executable(airport src/tasks/task_1.c
+        include/airport.h
+        include/airport.h)
+add_executable(railway_station src/tasks/task_2.c
+        include/airport.h
+        include/airport.h)
 
 target_include_directories(airport PRIVATE include)
 target_include_directories(railway_station PRIVATE include)

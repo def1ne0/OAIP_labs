@@ -10,7 +10,7 @@ use crate::input_utils::input_i32;
 fn main() -> Result<(), Box<dyn Error>>{
     let mut my_flights = Flights::new();
 
-    loop {
+        loop {
         println!(" -> 0. Выход");
         println!(" -> 1. Ввести данные о рейсах");
         println!(" -> 2. Просмотреть все рейсы");

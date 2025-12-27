@@ -4,7 +4,7 @@
 
 namespace tasks {
     void run_task(
-        int &choice,
+        const int &choice,
         void (*func_array[])()
     ) {
         func_array[choice - 1]();
