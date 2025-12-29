@@ -85,7 +85,7 @@ namespace str {
             capacity_ = other.capacity_;
             data_ = new char [capacity_];
 
-            std::copy(other.data_, other.data_ + length_ + 1, data_);
+            std::copy_n(other.data_, length_ + 1, data_);
         }
 
         return *this;
