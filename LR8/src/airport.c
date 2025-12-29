@@ -193,7 +193,7 @@ static int compare(const void *a, const void *b) {
 
     if (low < high) {
         int item = flights[high].departure_time;
-        int i = low - 1;
+        inti = low - 1;
 
         for (int j = low; j < high; j++) {
             if (flights[j].departure_time <= item) {
@@ -223,7 +223,7 @@ void sort_flights_by_departure_time(Flight *flights, int size) {
     printf("Массив успешно отсортирован по времени вылета по возрастанию\n");
 }
 
-void save_flights_to_binary_file(Flight *flights, int size) {
+void save_flights_to_binary_file(const Flight *flights, int size) {
     char filename[100];
     printf("Введите название файла, в который буду записаны данные: ");
     scanf("%99s", filename);
@@ -304,7 +304,7 @@ void update_flight_in_binary_file() {
     bool found = false;
 
     for (int i = 0; i < size; i++) {
-        fseek(file, sizeof(int) + i * sizeof(Flight), SEEK_SET);
+        fseek(file, (long int) (sizeof(int) + i * sizeof(Flight)), SEEK_SET);
 
         Flight current_flight;
         fread(&current_flight, sizeof(Flight), 1, file);
@@ -335,7 +335,7 @@ void update_flight_in_binary_file() {
             int minutes = current_flight.departure_time % 60;
             sprintf(current_flight.time_data.time_string, "%02d:%02d", hours, minutes);
 
-            fseek(file, sizeof(int) + i * sizeof(Flight), SEEK_SET);
+            fseek(file, (long int)(sizeof(int) + i * sizeof(Flight)), SEEK_SET);
             fwrite(&current_flight, sizeof(Flight), 1, file);
 
             printf("Рейс #%d успешно скорректирован в файле %s\n", flight_number_to_correct, filename);

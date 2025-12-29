@@ -5,8 +5,6 @@
 extern "C" {
 #endif // __cplusplus
 
-#include <stdbool.h>
-
 typedef struct {
     int flight_number;      // Номер рейса (целое число)
     char aircraft_type[50]; // Тип самолета (строка)
@@ -35,7 +33,7 @@ void update_flight_by_number(Flight *flights, int size);
 void sort_flights_by_departure_time(Flight *flights, int size);
 void print_menu();
 
-void save_flights_to_binary_file(Flight *flights, int size);
+void save_flights_to_binary_file(const Flight *flights, int size);
 void load_flights_from_binary_file(Flight **flights, int *size);
 void update_flight_in_binary_file(void);
 
