@@ -3,4 +3,5 @@
 **/.cache/
 **/build/
 **/target/
+**/.idea/
 compile_commands.json
