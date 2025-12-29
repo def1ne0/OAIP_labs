@@ -1,5 +1,4 @@
 #include <print>
-#include <pthread.h>
 
 #include "MyStr.h"
 #include "task_1.h"

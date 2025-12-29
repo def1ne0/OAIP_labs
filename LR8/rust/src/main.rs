@@ -5,7 +5,7 @@ use std::error::Error;
 
 use airport::airport_schedule::Flights;
 
-use crate::input_utils::input_i32;
+use input_utils::input_i32;
 
 fn main() -> Result<(), Box<dyn Error>>{
     let mut my_flights = Flights::new();

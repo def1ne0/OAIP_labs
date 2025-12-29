@@ -1,21 +1,19 @@
 #include "MyStr.h"
 
-#include <cstddef>
 #include <cstdio>
 #include <cstring>
-#include <endian.h>
 #include <istream>
 #include <optional>
 #include <stdexcept>
 
 namespace str {
-    void MyStr::resize(int new_size) {
+    void MyStr::resize(const size_t new_size) {
         if (new_size <= 0) return;
 
-        char *new_data = new char [new_size];
+        const auto new_data = new char [new_size];
 
         if (data_ != nullptr) {
-            std::copy(data_, data_ + length_, new_data);
+            std::copy_n(data_, length_, new_data);
 
             delete [] data_;
         } else {
@@ -24,8 +22,6 @@ namespace str {
 
         data_ = new_data;
         capacity_ = new_size;
-
-        new_data = nullptr;
     }
 
     MyStr::MyStr()
@@ -46,7 +42,7 @@ namespace str {
             data_ = new char [capacity_];
             data_[length_] = '\0';
 
-            std::copy(c_str, c_str + length_, data_);
+            std::copy_n(c_str, length_, data_);
         }
     }
 
@@ -72,10 +68,10 @@ namespace str {
         other.data_ = nullptr;
     }
 
-    size_t MyStr::c_str_length(char *c_str) const {
+    size_t MyStr::c_str_length(const char *c_str) {
         size_t length = 0;
 
-        for (; c_str[length] != '\0'; length++);
+        for (; c_str[length] != '\0'; length++) {};
 
         return length;
     }
@@ -109,7 +105,7 @@ namespace str {
         return *this;
     }
 
-    char &MyStr::operator [] (size_t index) {
+    char &MyStr::operator [] (const size_t index) const{
         if (index > length_) throw std::out_of_range("индекс вышел за пределы MyStr");
         return data_[index];
     }
@@ -138,8 +134,8 @@ namespace str {
         return data_;
     }
 
-    MyStr MyStr::cut_out_str(int start, int end) const {
-        if (start < 0 || end >= length_ || start > end) return MyStr();
+    MyStr MyStr::cut_out_str(const int start, const int end) const {
+        if (start < 0 || end >= length_ || start > end) return MyStr{};
 
         MyStr res;
 
@@ -168,7 +164,6 @@ namespace str {
 
     void MyStr::input_by_getchar() {
         int c;
-        int i {};
 
         while ((c = getchar()) != EOF && c != '\n') {
             this->push_back(static_cast<char>(c));
@@ -190,7 +185,7 @@ namespace str {
 
         resize(length_ + other.length_ + 1);
 
-        std::copy(other.data_, other.data_ + other.length_, data_ + length_);
+        std::copy_n(other.data_, other.length_, data_ + length_);
         data_[capacity_ - 1] = '\0';
 
         length_ += other.length_;
@@ -203,7 +198,7 @@ namespace str {
 
         resize(length_ + other_length + 1);
 
-        std::copy(other_str, other_str + other_length, data_ + length_);
+        std::copy_n(other_str, other_length, data_ + length_);
         data_[capacity_ - 1] = '\0';
 
         length_ += other_length;
@@ -230,7 +225,6 @@ namespace str {
         input.clear();
 
         char c;
-        int i {};
 
         while (in.get(c) && c != '\n') {
             input.push_back(c);

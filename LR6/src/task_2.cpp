@@ -4,7 +4,7 @@
 #include "c_str_utils.h"
 
 namespace task_2 {
-    size_t find_biggest(int *arr, size_t size) {
+    size_t find_biggest(const int *arr, const size_t size) {
         int max = arr[0];
         size_t max_idx = -1;
 
@@ -18,7 +18,7 @@ namespace task_2 {
         return max_idx;
     }
 
-    void execute_task_2(str::MyStr text) {
+    void execute_task_2(const str::MyStr &text) {
         int frequencies[256] {0};
 
         for (size_t i = 0; i < text.length(); i++) {
@@ -36,7 +36,7 @@ namespace task_2 {
         }
     }
 
-    void execute_task_2(char *text) {
+    void execute_task_2(const char *text) {
         int frequencies[256] {0};
 
         for (size_t i = 0; text[i] != '\0'; i++) {
@@ -65,7 +65,5 @@ namespace task_2 {
         //text.input_by_getchar();
 
         execute_task_2(text);
-
-        return;
     }
 }

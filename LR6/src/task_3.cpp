@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <print>
 
 #include "task_3.h"
@@ -6,12 +5,11 @@
 #include "c_str_utils.h"
 
 namespace task_3 {
-    void execute_task_3(str::MyStr input) {
-        size_t left = 0;
+    void execute_task_3(const str::MyStr &input) {
         size_t right = 0;
         int max_num = -1; //-1 вернет если не найдено
 
-        for (; left < input.length(); left++) {
+        for (size_t left = 0; left < input.length(); left++) {
             right = left + 1;
 
             if (static_cast<int>(input[left]) == 46) {
@@ -43,13 +41,12 @@ namespace task_3 {
         std::println("Максимальное число: {}", max_num);
     }
 
-    void execute_task_3(char *input) {
-        size_t len = c_str::find_length(input);
-        size_t left = 0;
+    void execute_task_3(const char *input) {
+        const size_t len = c_str::find_length(input);
         size_t right = 0;
         int max_num = -1; //-1 вернет если не найдено
 
-        for (; left < len; left++) {
+        for (size_t left = 0; left < len; left++) {
             right = left + 1;
 
             if (static_cast<int>(input[left]) == 46) {
@@ -93,7 +90,5 @@ namespace task_3 {
         //input.input_by_getchar();
 
         execute_task_3(input);
-
-        return;
     }
 }

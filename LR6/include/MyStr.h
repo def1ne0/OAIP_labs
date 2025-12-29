@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <cstddef>
 #include <istream>
 #include <optional>
 
@@ -11,10 +9,10 @@ namespace str {
         size_t length_;
         size_t capacity_;
 
-        void resize(int new_size);
+        void resize(size_t new_size);
     public:
         MyStr();
-        MyStr(char *c_str);
+        explicit MyStr(char *c_str);
         ~MyStr() noexcept;
 
         MyStr(const MyStr &other);
@@ -22,17 +20,17 @@ namespace str {
 
         MyStr &operator = (const MyStr &other);
         MyStr &operator = (MyStr &&other) noexcept;
-        char &operator [] (size_t index);
+        char &operator [] (size_t index) const;
         MyStr &operator += (const MyStr &other);
         MyStr &operator += (char *other);
 
-        size_t c_str_length(char *c_str) const;
+        static size_t c_str_length(const char *c_str);
 
-        size_t length() const;
-        size_t capacity() const;
-        const char *c_str() const; // НЕ ДЕЛИТАЙ ПАМЯТЬ, ТОКА ДЛЯ ВЫВОДА
-        MyStr cut_out_str(int start, int end) const;
-        std::optional<int> to_unsigned_int() const;
+        [[nodiscard]] size_t length() const;
+        [[nodiscard]] size_t capacity() const;
+        [[nodiscard]] const char *c_str() const; // НЕ ДЕЛИТАЙ ПАМЯТЬ, ТОКА ДЛЯ ВЫВОДА
+        [[nodiscard]] MyStr cut_out_str(int start, int end) const;
+        [[nodiscard]] std::optional<int> to_unsigned_int() const;
 
 
         void input_by_getchar();

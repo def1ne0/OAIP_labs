@@ -4,9 +4,9 @@
 #include <optional>
 
 namespace c_str {
-    char *cut_c_str(char *input, int start, int end);
+    char *cut_c_str(const char *input, int start, int end);
 
-    size_t find_length(char *input);
+    size_t find_length(const char *input);
 
     void input_str(char *str);
 
