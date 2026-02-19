@@ -8,9 +8,20 @@
 #include <QPropertyAnimation>
 #include <QDebug>
 
-MovingRectangle::MovingRectangle(qreal x, qreal y, qreal width, qreal height, QColor color, QGraphicsObject *parent)
+/*
+MovingRectangle::MovingRectangle(QGraphicsObject *parent)
     : QGraphicsObject(parent),
-      _rectangle(x, y, width, height),
+      _rectangle(0, 0, 100, 100),
+      _rectangle_color(Qt::black),
+      _animation_group(new QParallelAnimationGroup(this)) {
+
+    setPos(0, 0);
+}
+*/
+
+MovingRectangle::MovingRectangle(const qreal &x, const qreal &y, const qreal &width, const qreal &heigth,QColor color, QGraphicsObject *parent)
+    : QGraphicsObject(parent),
+      _rectangle(x, y, width, heigth),
       _rectangle_color(color),
       _animation_group(new QParallelAnimationGroup(this)) {
 

@@ -19,6 +19,8 @@ add_executable(LR9
         src/MainWindow.h
         src/MovingRectangle.cpp
         src/MovingRectangle.h
+        src/MovingWheel.cpp
+        src/MovingWheel.h
 )
 
 target_link_libraries(LR9

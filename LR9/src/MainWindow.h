@@ -10,6 +10,7 @@
 #include <memory>
 
 #include "MovingRectangle.h"
+#include "MovingWheel.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -24,6 +25,7 @@ private:
     QGraphicsScene                   *_scene = nullptr;
     QGraphicsView                    *_view = nullptr;
     std::unique_ptr<MovingRectangle> _moving_rect;
+    std::unique_ptr<MovingWheel>     _moving_wheel;
 };
 
 

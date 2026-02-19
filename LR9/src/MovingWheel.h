@@ -1,22 +1,24 @@
 //
-// Created by define on 18.02.2026.
+// Created by define on 19.02.2026.
 //
 
-#ifndef LR9_RECTANGLE_H
-#define LR9_RECTANGLE_H
+#ifndef LR9_MOVINGWHEEL_H
+#define LR9_MOVINGWHEEL_H
+
 
 #include <QPropertyAnimation>
 #include <QParallelAnimationGroup>
-#include <QGraphicsItem>
+#include <QGraphicsEllipseItem>
 
-class MovingRectangle : public QGraphicsObject {
+class MovingWheel : public QGraphicsObject {
     Q_OBJECT
     Q_PROPERTY(qreal xPos READ xPos WRITE setXPos)
     Q_PROPERTY(qreal yPos READ yPos WRITE setYPos)
 
 public:
-    // explicit MovingRectangle(QGraphicsObject *parent = nullptr);
-    explicit MovingRectangle(const qreal &x, const qreal &y, const qreal &width, const qreal &height, QColor color = Qt::green, QGraphicsObject *parent = nullptr);
+    // explicit MovingWheel(QGraphicsObject *parent = nullptr);
+    explicit MovingWheel(const qreal &x, const qreal &y, const qreal &radius, const QColor &color = Qt::green, QGraphicsObject *parent = nullptr);
+
     [[nodiscard]] QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
@@ -28,11 +30,12 @@ public:
     Q_INVOKABLE void moveRight(const qreal &distance, const int &duration = 1000);
     Q_INVOKABLE void stop();
 
-protected:
-    QRectF                   _rectangle;
-    QColor                   _rectangle_color;
-    QParallelAnimationGroup  *_animation_group = nullptr;
+private:
+    QGraphicsEllipseItem             _circle;
+    qreal                            _circle_radius;
+    QColor                           _circle_color;
+    QParallelAnimationGroup          *_animation_group = nullptr;
 };
 
 
-#endif //LR9_RECTANGLE_H
+#endif //LR9_MOVINGWHEEL_H
