@@ -5,7 +5,6 @@
 #ifndef LR9_MOVINGWHEEL_H
 #define LR9_MOVINGWHEEL_H
 
-
 #include <QPropertyAnimation>
 #include <QParallelAnimationGroup>
 #include <QGraphicsEllipseItem>
@@ -31,11 +30,9 @@ public:
     Q_INVOKABLE void stop();
 
 private:
-    QGraphicsEllipseItem             _circle;
     qreal                            _circle_radius;
     QColor                           _circle_color;
     QParallelAnimationGroup          *_animation_group = nullptr;
 };
-
 
 #endif //LR9_MOVINGWHEEL_H

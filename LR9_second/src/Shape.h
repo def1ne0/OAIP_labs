@@ -1,0 +1,61 @@
+//
+// Created by define on 05.03.2026.
+//
+
+#ifndef LR9_SECOND_SHAPE_H
+#define LR9_SECOND_SHAPE_H
+
+#include <QGraphicsObject>
+#include <QPointF>
+#include <QTimer>
+#include <QPropertyAnimation>
+#include <QParallelAnimationGroup>
+#include <QPainter>
+
+class Shape : public QGraphicsObject {
+    Q_OBJECT
+    Q_PROPERTY(qreal rotationAngle READ rotationAngle WRITE setRotationAngle)
+    Q_PROPERTY(qreal scaleFactor READ scaleFactor WRITE setScaleFactor)
+
+public:
+    explicit Shape(QGraphicsItem* parent = nullptr);
+    virtual ~Shape() = default;
+
+    // Основные операции
+    virtual double area() const = 0;
+    virtual double perimeter() const = 0;
+    virtual QPointF centerOfMass() const = 0;
+
+    // Перемещение центра масс
+    void moveCenterTo(const QPointF& newCenter);
+    void moveCenterBy(const QPointF& offset);
+
+    // Трансформации с анимацией
+    void moveTo(const QPointF& pos, int durationMs = 1000);
+    void rotateBy(double angle, const QPointF& center, int durationMs = 1000);
+    void scaleBy(double factor, const QPointF& center, int durationMs = 1000);
+
+    // Геттеры/сеттеры для анимации
+    qreal rotationAngle() const { return rotation(); }
+    void setRotationAngle(qreal angle) { setRotation(angle); }
+
+    qreal scaleFactor() const { return transform().m11(); }
+    void setScaleFactor(qreal factor);
+
+    // Обязательные методы QGraphicsItem
+    QRectF boundingRect() const override = 0;
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
+               QWidget* widget) override = 0;
+
+    signals:
+        void transformationTick();
+
+protected:
+    QTimer* _animationTimer;
+    QParallelAnimationGroup* _animGroup;
+    QPointF _center;
+
+    virtual void updateCenterOfMass() = 0;
+};
+
+#endif //LR9_SECOND_SHAPE_H

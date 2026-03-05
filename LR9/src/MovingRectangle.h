@@ -29,7 +29,8 @@ public:
     Q_INVOKABLE void stop();
 
 protected:
-    QRectF                   _rectangle;
+    qreal                    _width;
+    qreal                    _height;
     QColor                   _rectangle_color;
     QParallelAnimationGroup  *_animation_group = nullptr;
 };

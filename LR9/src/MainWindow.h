@@ -9,8 +9,11 @@
 #include <QGraphicsView>
 #include <memory>
 
-#include "MovingRectangle.h"
-#include "MovingWheel.h"
+#include "MovingLocomotive.h"
+
+const QColor SCENE_BACKGROUND_COLOR = Qt::white;
+constexpr qreal SCENE_W = 2560;
+constexpr qreal SCENE_H = 1600;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -22,10 +25,9 @@ private:
     void setupScene();
     void setupUi() const;
 
-    QGraphicsScene                   *_scene = nullptr;
-    QGraphicsView                    *_view = nullptr;
-    std::unique_ptr<MovingRectangle> _moving_rect;
-    std::unique_ptr<MovingWheel>     _moving_wheel;
+    QGraphicsScene                    *_scene = nullptr;
+    QGraphicsView                     *_view = nullptr;
+    std::unique_ptr<MovingLocomotive> _locomotive;
 };
 
 

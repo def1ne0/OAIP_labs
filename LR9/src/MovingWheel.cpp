@@ -3,10 +3,9 @@
 //
 
 #include <QBrush>
+#include <QPainter>
 
 #include "MovingWheel.h"
-
-#include <QPainter>
 
 MovingWheel::MovingWheel(
     const qreal &x,
@@ -15,24 +14,27 @@ MovingWheel::MovingWheel(
     const QColor &color,
     QGraphicsObject *parent)
         :   QGraphicsObject(parent),
-            _circle(x, y, radius * 2, radius * 2, this),
             _circle_radius(radius),
             _circle_color(color),
-            _animation_group(new QParallelAnimationGroup(this)){
-
+            _animation_group(new QParallelAnimationGroup(this)) {
     setPos(x, y);
-    _circle.setBrush(_circle_color);
-    _circle.setPen(QPen(color, 2));
+    setFlags(ItemIsMovable | ItemSendsGeometryChanges);
+
 }
 
 QRectF MovingWheel::boundingRect() const {
-    return _circle.boundingRect();
+    return { -_circle_radius - 2, -_circle_radius - 2, _circle_radius * 2 + 2, _circle_radius * 2 + 2 };
 }
 
 void MovingWheel::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     Q_UNUSED(option)
     Q_UNUSED(widget)
-    Q_UNUSED(painter);
+
+    painter->setRenderHint(QPainter::Antialiasing);
+    painter->setBrush(_circle_color);
+    painter->setPen(Qt::NoPen);
+
+    painter->drawEllipse(QPointF(0, 0), _circle_radius, _circle_radius);
 }
 
 void MovingWheel::moveRight(const qreal &distance, const int &duration) {

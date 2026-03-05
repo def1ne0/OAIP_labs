@@ -21,6 +21,10 @@ add_executable(LR9
         src/MovingRectangle.h
         src/MovingWheel.cpp
         src/MovingWheel.h
+        src/MovingLocomotive.h
+        src/MovingLocomotive.cpp
+        src/SmokeParticle.cpp
+        src/SmokeParticle.h
 )
 
 target_link_libraries(LR9

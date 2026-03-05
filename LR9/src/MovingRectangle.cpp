@@ -8,20 +8,10 @@
 #include <QPropertyAnimation>
 #include <QDebug>
 
-/*
-MovingRectangle::MovingRectangle(QGraphicsObject *parent)
+MovingRectangle::MovingRectangle(const qreal &x, const qreal &y, const qreal &width, const qreal &height, QColor color, QGraphicsObject *parent)
     : QGraphicsObject(parent),
-      _rectangle(0, 0, 100, 100),
-      _rectangle_color(Qt::black),
-      _animation_group(new QParallelAnimationGroup(this)) {
-
-    setPos(0, 0);
-}
-*/
-
-MovingRectangle::MovingRectangle(const qreal &x, const qreal &y, const qreal &width, const qreal &heigth,QColor color, QGraphicsObject *parent)
-    : QGraphicsObject(parent),
-      _rectangle(x, y, width, heigth),
+      _width(width),
+      _height(height),
       _rectangle_color(color),
       _animation_group(new QParallelAnimationGroup(this)) {
 
@@ -29,16 +19,17 @@ MovingRectangle::MovingRectangle(const qreal &x, const qreal &y, const qreal &wi
 }
 
 QRectF MovingRectangle::boundingRect() const {
-    return _rectangle;
+    return { 0, 0, _width, _height };
 }
 
 void MovingRectangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     Q_UNUSED(option)
     Q_UNUSED(widget)
 
+    painter->setRenderHint(QPainter::Antialiasing);
     painter->setBrush(_rectangle_color);
-    painter->setPen(QPen(Qt::black, 2));
-    painter->drawRect(_rectangle);
+    painter->setPen(Qt::NoPen);
+    painter->drawRect(0, 0, static_cast<int>(_width), static_cast<int>(_height));
 }
 
 void MovingRectangle::moveRight(const qreal &distance, const int &duration) {
