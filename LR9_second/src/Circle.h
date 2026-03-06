@@ -14,17 +14,17 @@ class Circle : public Shape {
 public:
     Circle(qreal x, qreal y, qreal r, QGraphicsItem* parent = nullptr);
 
-    double area() const override { return M_PI * _radius * _radius; }
-    double perimeter() const override { return 2 * M_PI * _radius; }
-    QPointF centerOfMass() const override { return QPointF(0, 0); }
+    [[nodiscard]] double area() const override { return M_PI * _radius * _radius; }
+    [[nodiscard]] double perimeter() const override { return 2 * M_PI * _radius; }
+    [[nodiscard]] QPointF centerOfMass() const override { return QPointF(0, 0); }
 
-    qreal radius() const { return _radius; }
+    [[nodiscard]] qreal radius() const { return _radius; }
     void setRadius(qreal r);
 
-    QRectF boundingRect() const override;
+    [[nodiscard]] QRectF boundingRect() const override;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
                QWidget* widget) override;
-    QPainterPath shape() const;
+    [[nodiscard]] QPainterPath shape() const override;
 
     void updateCenterOfMass() override { _center = QPointF(0, 0); }
 

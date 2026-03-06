@@ -18,18 +18,15 @@ GraphicsView::GraphicsView(QGraphicsScene* scene, QWidget* parent)
 }
 
 void GraphicsView::mousePressEvent(QMouseEvent* event) {
-    QPointF scenePos = mapToScene(event->pos());
+    const QPointF scenePos = mapToScene(event->pos());
 
     if (event->button() == Qt::LeftButton) {
-        // Проверяем, есть ли элемент под курсором
         auto* item = scene()->itemAt(scenePos, QTransform());
 
         if (item) {
-            // Выделяем элемент
             item->setSelected(true);
             emit itemSelected(item);
         } else {
-            // Кликнули в пустое место - снимаем выделение
             scene()->clearSelection();
             emit itemSelected(nullptr);
         }

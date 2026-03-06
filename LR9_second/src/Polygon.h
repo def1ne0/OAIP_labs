@@ -13,24 +13,24 @@ class Polygon : public Shape {
 public:
     explicit Polygon(const QVector<QPointF>& vertices, QGraphicsItem* parent = nullptr);
 
-    double area() const override;
-    double perimeter() const override;
-    QPointF centerOfMass() const override;
+    [[nodiscard]] double area() const override;
+    [[nodiscard]] double perimeter() const override;
+    [[nodiscard]] QPointF centerOfMass() const override;
 
     void setVertices(const QVector<QPointF>& vertices);
-    QVector<QPointF> vertices() const { return _vertices; }
+    [[nodiscard]] QVector<QPointF> vertices() const { return _vertices; }
 
-    QRectF boundingRect() const override;
+    [[nodiscard]] QRectF boundingRect() const override;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
                QWidget* widget) override;
-    QPainterPath shape() const override;
+    [[nodiscard]] QPainterPath shape() const override;
 
 protected:
     QVector<QPointF> _vertices;
     void updateCenterOfMass() override;
 
 private:
-    QPointF calculateCenterByTriangulation() const;
+    [[nodiscard]] QPointF calculateCenterByTriangulation() const;
 };
 
 

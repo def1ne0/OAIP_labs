@@ -7,19 +7,18 @@
 #include <QPainter>
 
 Shape::Shape(QGraphicsItem* parent)
-    : QGraphicsObject(parent)  // ← Теперь это работает!
-    , _animationTimer(new QTimer(this))  // ← this - это QObject*
-    , _animGroup(new QParallelAnimationGroup(this))  // ← this - это QObject*
+    : QGraphicsObject(parent)
+    , _animationTimer(new QTimer(this))
+    , _animGroup(new QParallelAnimationGroup(this))
 {
     setFlags(ItemIsMovable | ItemSendsGeometryChanges);
-    _animationTimer->setInterval(16); // ~60 FPS
+    _animationTimer->setInterval(16);
 
-    // Связываем таймер с событием
     connect(_animationTimer, &QTimer::timeout, this, &Shape::transformationTick);
 }
 
 void Shape::moveCenterTo(const QPointF& newCenter) {
-    QPointF current = centerOfMass();
+    const QPointF current = centerOfMass();
     moveBy(newCenter.x() - current.x(), newCenter.y() - current.y());
 }
 
@@ -31,7 +30,7 @@ void Shape::moveTo(const QPointF& pos, int durationMs) {
     _animGroup->stop();
     _animGroup->clear();
 
-    auto anim = new QPropertyAnimation(this, "pos");
+    const auto anim = new QPropertyAnimation(this, "pos");
     anim->setDuration(durationMs);
     anim->setStartValue(QPointF(pos.x(), pos.y()));
     anim->setEndValue(pos);
@@ -85,8 +84,8 @@ void Shape::scaleBy(double factor, const QPointF& center, int durationMs) {
 
 void Shape::setScaleFactor(qreal factor) {
     QTransform t = transform();
-    qreal currentScale = t.m11();
-    if (currentScale > 0) {
+    auto currentScale = transform().m11();
+    if (transform().m11() > 0) {
         t.scale(factor / currentScale, factor / currentScale);
         setTransform(t);
     }

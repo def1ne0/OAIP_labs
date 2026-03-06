@@ -22,11 +22,13 @@ void Hexagon::setSide(qreal s) {
 
 void Hexagon::updateVertices() {
     _vertices.clear();
+
     for (int i = 0; i < 6; ++i) {
-        qreal angle = i * M_PI / 3 - M_PI / 6;
-        qreal x = _side * cos(angle);
-        qreal y = _side * sin(angle);
+        const qreal angle = i * M_PI / 3 - M_PI / 6;
+        const qreal x = _side * cos(angle);
+        const qreal y = _side * sin(angle);
         _vertices.append(QPointF(x, y));
     }
+
     updateCenterOfMass();
 }

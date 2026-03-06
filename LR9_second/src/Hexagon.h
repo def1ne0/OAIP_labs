@@ -14,7 +14,7 @@ class Hexagon : public Polygon {
 public:
     Hexagon(qreal x, qreal y, qreal side, QGraphicsItem* parent = nullptr);
 
-    qreal side() const { return _side; }
+    [[nodiscard]] qreal side() const { return _side; }
     void setSide(qreal s);
 
     void updateVertices();

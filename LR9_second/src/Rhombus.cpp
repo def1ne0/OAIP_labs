@@ -5,7 +5,7 @@
 #include "Rhombus.h"
 #include <cmath>
 
-Rhombus::Rhombus(qreal x, qreal y, qreal side, qreal angleDegrees,
+Rhombus::Rhombus(const qreal x, const qreal y, const qreal side, const qreal angleDegrees,
                  QGraphicsItem* parent)
     : Polygon({}, parent)
     , _side(side)
@@ -15,14 +15,14 @@ Rhombus::Rhombus(qreal x, qreal y, qreal side, qreal angleDegrees,
     setPos(x, y);
 }
 
-void Rhombus::setSide(qreal s) {
+void Rhombus::setSide(const qreal s) {
     prepareGeometryChange();
     _side = s;
     updateVertices();
     update();
 }
 
-void Rhombus::setAcuteAngle(qreal angle) {
+void Rhombus::setAcuteAngle(const qreal angle) {
     prepareGeometryChange();
     _angle = angle;
     updateVertices();
@@ -30,9 +30,9 @@ void Rhombus::setAcuteAngle(qreal angle) {
 }
 
 void Rhombus::updateVertices() {
-    qreal rad = _angle * M_PI / 180.0;
-    qreal h = _side * sin(rad);
-    qreal offset = _side * cos(rad);
+    const qreal rad = _angle * M_PI / 180.0;
+    const qreal h = _side * sin(rad);
+    const qreal offset = _side * cos(rad);
 
     _vertices = {
         QPointF(0, 0),
@@ -40,6 +40,7 @@ void Rhombus::updateVertices() {
         QPointF(_side + offset, h),
         QPointF(offset, h)
     };
+
     updateCenterOfMass();
 }
 

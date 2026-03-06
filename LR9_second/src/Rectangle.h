@@ -16,11 +16,11 @@ class Rectangle : public Polygon {
 public:
     Rectangle(qreal x, qreal y, qreal w, qreal h, QGraphicsItem* parent = nullptr);
 
-    double area() const override;
-    double perimeter() const override;
+    [[nodiscard]] double area() const override;
+    [[nodiscard]] double perimeter() const override;
 
-    qreal width() const { return _width; }
-    qreal height() const { return _height; }
+    [[nodiscard]] qreal width() const { return _width; }
+    [[nodiscard]] qreal height() const { return _height; }
     void setWidth(qreal w);
     void setHeight(qreal h);
 

@@ -12,9 +12,9 @@ public:
     Star(int points, qreal outerRadius, qreal innerRadius,
          QGraphicsItem* parent = nullptr);
 
-    int points() const { return _points; }
-    qreal outerRadius() const { return _outerRadius; }
-    qreal innerRadius() const { return _innerRadius; }
+    [[nodiscard]] int points() const { return _points; }
+    [[nodiscard]] qreal outerRadius() const { return _outerRadius; }
+    [[nodiscard]] qreal innerRadius() const { return _innerRadius; }
 
     void updateVertices();
 

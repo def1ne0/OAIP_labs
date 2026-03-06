@@ -16,8 +16,8 @@ public:
     Rhombus(qreal x, qreal y, qreal side, qreal angleDegrees,
             QGraphicsItem* parent = nullptr);
 
-    qreal side() const { return _side; }
-    qreal acuteAngle() const { return _angle; }
+    [[nodiscard]] qreal side() const { return _side; }
+    [[nodiscard]] qreal acuteAngle() const { return _angle; }
 
     void setSide(qreal s);
     void setAcuteAngle(qreal angle);

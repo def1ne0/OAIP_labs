@@ -6,21 +6,21 @@
 #include <QPainter>
 #include <QPainterPath>
 
-Circle::Circle(qreal x, qreal y, qreal r, QGraphicsItem* parent)
+Circle::Circle(const qreal x, const qreal y, const qreal r, QGraphicsItem* parent)
     : Shape(parent)
     , _radius(r)
 {
     setPos(x, y);
 }
 
-void Circle::setRadius(qreal r) {
+void Circle::setRadius(const qreal r) {
     prepareGeometryChange();
     _radius = r;
     update();
 }
 
 QRectF Circle::boundingRect() const {
-    return QRectF(-_radius, -_radius, 2 * _radius, 2 * _radius);
+    return {-_radius, -_radius, 2 * _radius, 2 * _radius};
 }
 
 void Circle::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,

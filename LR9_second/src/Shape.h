@@ -19,34 +19,28 @@ class Shape : public QGraphicsObject {
 
 public:
     explicit Shape(QGraphicsItem* parent = nullptr);
-    virtual ~Shape() = default;
+    ~Shape() override = default;
 
-    // Основные операции
-    virtual double area() const = 0;
-    virtual double perimeter() const = 0;
-    virtual QPointF centerOfMass() const = 0;
+    [[nodiscard]] virtual double area() const = 0;
+    [[nodiscard]] virtual double perimeter() const = 0;
+    [[nodiscard]] virtual QPointF centerOfMass() const = 0;
 
-    // Перемещение центра масс
     void moveCenterTo(const QPointF& newCenter);
     void moveCenterBy(const QPointF& offset);
 
-    // Трансформации с анимацией
     void moveTo(const QPointF& pos, int durationMs = 1000);
     void rotateBy(double angle, const QPointF& center, int durationMs = 1000);
     void scaleBy(double factor, const QPointF& center, int durationMs = 1000);
 
-    // Геттеры/сеттеры для анимации
-    qreal rotationAngle() const { return rotation(); }
-    void setRotationAngle(qreal angle) { setRotation(angle); }
+    [[nodiscard]] qreal rotationAngle() const { return rotation(); }
+    void setRotationAngle(const qreal angle) { setRotation(angle); }
 
-    qreal scaleFactor() const { return transform().m11(); }
+    [[nodiscard]] qreal scaleFactor() const { return transform().m11(); }
     void setScaleFactor(qreal factor);
 
-    // Обязательные методы QGraphicsItem
-    QRectF boundingRect() const override = 0;
+    [[nodiscard]] QRectF boundingRect() const override = 0;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
-               QWidget* widget) override = 0;
-
+        QWidget* widget) override = 0;
     signals:
         void transformationTick();
 

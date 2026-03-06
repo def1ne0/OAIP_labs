@@ -7,7 +7,6 @@
 
 #include "Polygon.h"
 
-// Square НЕ наследуется от Rectangle!
 class Square : public Polygon {
     Q_OBJECT
     Q_PROPERTY(qreal side READ side WRITE setSide)
@@ -15,7 +14,7 @@ class Square : public Polygon {
 public:
     Square(qreal x, qreal y, qreal sideLength, QGraphicsItem* parent = nullptr);
 
-    qreal side() const { return _side; }
+    [[nodiscard]] qreal side() const { return _side; }
     void setSide(qreal s);
 
 protected:

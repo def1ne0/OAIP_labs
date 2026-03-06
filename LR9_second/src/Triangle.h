@@ -17,9 +17,9 @@ public:
     void setPoint2(const QPointF& p);
     void setPoint3(const QPointF& p);
 
-    QPointF point1() const { return _vertices[0]; }
-    QPointF point2() const { return _vertices[1]; }
-    QPointF point3() const { return _vertices[2]; }
+    [[nodiscard]] QPointF point1() const { return _vertices[0]; }
+    [[nodiscard]] QPointF point2() const { return _vertices[1]; }
+    [[nodiscard]]  QPointF point3() const { return _vertices[2]; }
 };
 
 
